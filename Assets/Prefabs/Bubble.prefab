@@ -102,9 +102,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isExpanding: 0
-  collider: {fileID: 3385970943473734895}
-  body: {fileID: 3895469788322439511}
+  initialForce: 50
+  growthRate: {x: 0.005, y: 0.005, z: 1}
+  shrinkRate: {x: -0.000001, y: -0.000001, z: 1}
+  maxSize: 3
+  minSize: 0.25
+  isMouseDown: 0
+  sprites:
+  - {fileID: 21300000, guid: cf35119f7b53e1c419bb1c7cb3af6dda, type: 3}
+  - {fileID: 21300000, guid: 3995627625e4d9d4386409a2bf99e8cc, type: 3}
+  - {fileID: 21300000, guid: c4797b928419e844aaef5d3f039aa7f3, type: 3}
+  - {fileID: 21300000, guid: 39cdb9ff05036254493f8b78679c69a0, type: 3}
+  - {fileID: 21300000, guid: 1652f2efa5721a446892d51b273576dc, type: 3}
+  - {fileID: 21300000, guid: db1bb1484620e8e4d8afff9f6d5c6514, type: 3}
 --- !u!58 &3385970943473734895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +145,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

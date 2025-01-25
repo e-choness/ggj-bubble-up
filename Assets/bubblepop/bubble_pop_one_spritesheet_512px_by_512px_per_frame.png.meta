@@ -180,6 +180,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -834,7 +873,36 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_0: 8456465849144358525
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_1: -8275833596728303251
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_10: 8160138790770728453
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_11: 5350726161108630367
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_12: -5834687443799816608
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_13: 7035500045205991315
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_14: -3110910750828684260
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_15: -8808369198917631490
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_16: -7036536544970709569
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_17: 7718352446526204022
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_18: -8715240009166772611
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_19: 2314948236663325676
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_2: 4804022717145555415
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_20: -2828939010861495818
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_21: -6341578191823308885
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_22: -6479834193714726394
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_23: -3135111771722827504
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_24: 3666345894304838157
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_25: 1577507798888157893
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_26: 5895179385797064916
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_27: 8199971860549425455
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_28: -6252569709973399121
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_3: 8198065884509332597
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_4: -5843406488975326163
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_5: 5154047843403636704
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_6: 8600701627906961662
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_7: 8212665770084564719
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_8: 2678799513242350375
+      bubble_pop_one_spritesheet_512px_by_512px_per_frame_9: -7771381634026353892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

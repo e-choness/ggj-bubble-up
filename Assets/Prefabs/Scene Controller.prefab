@@ -46,9 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuName: Main Menu
   gameSceneName: Game
+  gameOverScene: Game Over
   onGoToMainMenu:
     m_PersistentCalls:
       m_Calls: []
   onGoToGameScene:
+    m_PersistentCalls:
+      m_Calls: []
+  onGoToGameOver:
     m_PersistentCalls:
       m_Calls: []

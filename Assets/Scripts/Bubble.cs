@@ -1,13 +1,17 @@
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
-{
-    //add bubble properties here:
-    public bool isExpanding;
-    private Vector3 scaleIncrement = new Vector3(0.005f, 0.005f, 1);
-    private float maxSize = 3;
+{    
     public new CircleCollider2D collider;
     public Rigidbody2D body;
+    // public bool isExpanding;
+    public Vector3 growthRate = new Vector3(0.005f, 0.005f, 1);
+    public Vector3 shrinkRate = new Vector3(-0.000001f, -0.000001f, 1);
+    public float maxSize = 3;
+    public double minSize = 0.25;
+
+    public bool isMouseDown;
+
     //potentially use the same value for all the vector values
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,8 +27,11 @@ public class Bubble : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
+    {   
+    //    if (!isMouseDown) {
+    //     Shrink();
+    //    }
+        //floatUp();
         /*
         Get current bubble size
         set velocity to negative /apply gravity
@@ -34,25 +41,40 @@ public class Bubble : MonoBehaviour
 
     void OnMouseDrag()
     {
+        isMouseDown = true;
         Expand();
-        floatUp();
+        
+    }
+
+    void onMouseExit()
+    {
+        isMouseDown = false;
+        Debug.Log("off bubble");
     }
     void Expand()
     {
-        Vector3 newSize = transform.localScale += scaleIncrement;
-        Debug.Log(newSize.x);
+        Vector3 newSize = transform.localScale + growthRate;
         if (newSize.x < maxSize){
-        transform.localScale += scaleIncrement;//slurp this later
+            transform.localScale += growthRate;//slurp this later
+            //transform.localScale = Vector3.Slerp(Vector3.one, Vector3.one * maxSize, transform.localScale);//slurp this later
         }
         //add collider scaling
     }
-
+    // void Shrink()
+    // {
+    //     Vector3 newSize = transform.localScale + shrinkRate;
+    //     if (newSize.x > minSize){
+    //         transform.localScale += shrinkRate;
+    //     }
+    // }
     void floatUp()
     {
+        //Vector3.up
         Vector3 upwardForce = new Vector3(0f, 1f, 1);
-        body.AddForce(upwardForce, ForceMode2D.Force);
+        body.AddForce(Vector3.up * 0.5f, ForceMode2D.Force);
     }
 
+   
     void Sink()
     {
 

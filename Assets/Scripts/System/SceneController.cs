@@ -16,6 +16,7 @@ namespace System
     
     /// <summary>
     /// Singleton that controls scene changes. Use the Instance field.
+    /// Static methods are ok not using the Instance
     /// </summary>
     public class SceneController : SingletonPersistent<SceneController>
     {

@@ -3,28 +3,38 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bubble : MonoBehaviour
-{    
-    public new CircleCollider2D collider;
-    public Rigidbody2D body;
+{
+    [Header("Physics")]
+    [SerializeField] private float initialForce = 50f;
+    [SerializeField] private Vector3 growthRate = new(0.005f, 0.005f, 1);
+    [SerializeField] private Vector3 shrinkRate = new(-0.000001f, -0.000001f, 1);
     // public bool isExpanding;
-    public Vector3 growthRate = new Vector3(0.005f, 0.005f, 1);
-    public Vector3 shrinkRate = new Vector3(-0.000001f, -0.000001f, 1);
-    public float maxSize = 3;
-    public double minSize = 0.25;
     
-    [SerializeField] private float initialForce = 5f;
+    [Header("Properties")]
+    [SerializeField] private float maxSize = 3;
+    [SerializeField] private double minSize = 0.25;
+    
+    [Header("Controls")]
+    [SerializeField] private bool isMouseDown;
 
-    public bool isMouseDown;
-
+    [Header("Visuals")]
+    [SerializeField] private List<Sprite> sprites = new();
+    
+    // Components
     private SpriteRenderer _spriteRenderer;
+    private CircleCollider2D _collider;
+    private Rigidbody2D _rigidbody;
 
     //potentially use the same value for all the vector values
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<CircleCollider2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -43,7 +53,7 @@ public class Bubble : MonoBehaviour
 
     #region Controls
 
-    void OnMouseDrag()
+    private void OnMouseDrag()
     {
         isMouseDown = true;
         Expand();
@@ -61,9 +71,9 @@ public class Bubble : MonoBehaviour
 
     #region Movement
 
-    void Expand()
+    private void Expand()
     {
-        Vector3 newSize = transform.localScale + growthRate;
+        var newSize = transform.localScale + growthRate;
         if (newSize.x < maxSize){
             transform.localScale += growthRate;//slurp this later
             //transform.localScale = Vector3.Slerp(Vector3.one, Vector3.one * maxSize, transform.localScale);//slurp this later
@@ -80,8 +90,7 @@ public class Bubble : MonoBehaviour
     void floatUp()
     {
         //Vector3.up
-        Vector3 upwardForce = new Vector3(0f, 1f, 1);
-        body.AddForce(Vector3.up * 0.5f, ForceMode2D.Force);
+        _rigidbody.AddForce(Vector3.up * 0.5f, ForceMode2D.Force);
     }
 
    
@@ -100,7 +109,7 @@ public class Bubble : MonoBehaviour
 
     public bool IsSameColor(Bubble other) => _spriteRenderer.sprite == other._spriteRenderer.sprite;
 
-    public void SetRandomColor(List<Sprite> sprites)
+    public void SetRandomColor()
     {
         _spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count - 1)];
     }
@@ -113,7 +122,7 @@ public class Bubble : MonoBehaviour
     {
         transform.position = spawnPosition;
         var direction = (originPosition - spawnPosition).normalized; // destination - origin
-        GetComponent<Rigidbody2D>().AddForce(direction * initialForce, ForceMode2D.Force);
+        _rigidbody.AddForce(direction * initialForce, ForceMode2D.Force);
         Debug.Log($"Applying Initial force: {direction * initialForce}");
     }
 

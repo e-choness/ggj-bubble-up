@@ -10,6 +10,9 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject bubblePrefab;
     
+    /// <summary>
+    /// Seconds between bubble spawns
+    /// </summary>
     [SerializeField] private float secondsBetweenSpawns = 30.0f;
     
     /// <summary>
@@ -23,13 +26,13 @@ public class SpawnManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int spawnLimit = 20;
 
+    /// <summary>
+    /// The range where the bubble spawns on the screen
+    /// </summary>
     [SerializeField, Min(0f)] private float spawnRadius;
-
-    [SerializeField] private List<Sprite> sprites = new();
+    
 
     private List<float> previousSpawnAngles = new();
-    
-    private Vector2 SpawnRange => GetRandomSpawnPosition();
     
     /// <summary>
     /// A pool for pre-instantiated bubbles
@@ -70,7 +73,7 @@ public class SpawnManager : MonoBehaviour
         for (var i = 0; i < spawnLimit; i++)
         {
             var bubble = Instantiate(bubblePrefab, transform);
-            bubble.GetComponent<Bubble>().SetRandomColor(sprites);
+            bubble.GetComponent<Bubble>().SetRandomColor();
             bubble.SetActive(false);
             _bubblePool.Enqueue(bubble);
         }

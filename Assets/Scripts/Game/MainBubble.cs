@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,11 +32,14 @@ namespace Game
         public static MainBubble Instance;
 
         public static List<Bubble> bubbles = new();
+        private AudioSource _audioSource;
 
         void Awake()
         {
             if (Instance != null) Destroy(gameObject);
             else Instance = this;
+
+            _audioSource = GetComponent<AudioSource>();
         }
 
         void FixedUpdate()
@@ -73,7 +77,7 @@ namespace Game
 
         public void Pop()
         {
-            
+            _audioSource.Play();
         }
     }
 }

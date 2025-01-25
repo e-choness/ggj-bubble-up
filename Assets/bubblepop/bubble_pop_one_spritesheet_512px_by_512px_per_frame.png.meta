@@ -1,0 +1,842 @@
+fileFormatVersion: 2
+guid: c63b437911a9e4641909c1470fee929b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8456465849144358525
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_0
+  - first:
+      213: -8275833596728303251
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_1
+  - first:
+      213: 4804022717145555415
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_2
+  - first:
+      213: 8198065884509332597
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_3
+  - first:
+      213: -5843406488975326163
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_4
+  - first:
+      213: 5154047843403636704
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_5
+  - first:
+      213: 8600701627906961662
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_6
+  - first:
+      213: 8212665770084564719
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_7
+  - first:
+      213: 2678799513242350375
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_8
+  - first:
+      213: -7771381634026353892
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_9
+  - first:
+      213: 8160138790770728453
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_10
+  - first:
+      213: 5350726161108630367
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_11
+  - first:
+      213: -5834687443799816608
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_12
+  - first:
+      213: 7035500045205991315
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_13
+  - first:
+      213: -3110910750828684260
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_14
+  - first:
+      213: -8808369198917631490
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_15
+  - first:
+      213: -7036536544970709569
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_16
+  - first:
+      213: 7718352446526204022
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_17
+  - first:
+      213: -8715240009166772611
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_18
+  - first:
+      213: 2314948236663325676
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_19
+  - first:
+      213: -2828939010861495818
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_20
+  - first:
+      213: -6341578191823308885
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_21
+  - first:
+      213: -6479834193714726394
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_22
+  - first:
+      213: -3135111771722827504
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_23
+  - first:
+      213: 3666345894304838157
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_24
+  - first:
+      213: 1577507798888157893
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_25
+  - first:
+      213: 5895179385797064916
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_26
+  - first:
+      213: 8199971860549425455
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_27
+  - first:
+      213: -6252569709973399121
+    second: bubble_pop_one_spritesheet_512px_by_512px_per_frame_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_0
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 580
+        width: 374
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d76b871b2e66b5570800000000000000
+      internalID: 8456465849144358525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_1
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 580
+        width: 374
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6124c6e035562d80800000000000000
+      internalID: -8275833596728303251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_2
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 927
+        width: 116
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d12e5c55315ba240800000000000000
+      internalID: 4804022717145555415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_3
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 860
+        width: 72
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5746d6b9c7165c170800000000000000
+      internalID: 8198065884509332597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_4
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 867
+        width: 56
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d24c96a02cc08eea0800000000000000
+      internalID: -5843406488975326163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_5
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 909
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ef117dc43bd68740800000000000000
+      internalID: 5154047843403636704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_6
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 580
+        width: 369
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0b486ef84db5770800000000000000
+      internalID: 8600701627906961662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_7
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 822
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fee76ec510049f170800000000000000
+      internalID: 8212665770084564719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_8
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 743
+        width: 37
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723bc43e6f10d2520800000000000000
+      internalID: 2678799513242350375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_9
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 445
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1b4dd11491862490800000000000000
+      internalID: -7771381634026353892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_10
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 460
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e56c5fef2ae3170800000000000000
+      internalID: 8160138790770728453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_11
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 432
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5bf44b1819914a40800000000000000
+      internalID: 5350726161108630367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_12
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 449
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06641e0fea6070fa0800000000000000
+      internalID: -5834687443799816608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_13
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 458
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39f6fb3f30e13a160800000000000000
+      internalID: 7035500045205991315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_14
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 381
+        width: 44
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1c99e88723d3d4d0800000000000000
+      internalID: -3110910750828684260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_15
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 400
+        width: 61
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1c500e1e262c580800000000000000
+      internalID: -8808369198917631490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_16
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 407
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb567f32b43395e90800000000000000
+      internalID: -7036536544970709569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_17
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 306
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 678267218a81d1b60800000000000000
+      internalID: 7718352446526204022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_18
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 306
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d76a751136f3d0780800000000000000
+      internalID: -8715240009166772611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_19
+      rect:
+        serializedVersion: 2
+        x: 1501
+        y: 300
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce30cb7f729502020800000000000000
+      internalID: 2314948236663325676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_20
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 188
+        width: 65
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f90b5e35f69db8d0800000000000000
+      internalID: -2828939010861495818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_21
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 193
+        width: 47
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7f101db303ef7a0800000000000000
+      internalID: -6341578191823308885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_22
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 194
+        width: 33
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a3438e1210316a0800000000000000
+      internalID: -6479834193714726394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_23
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 120
+        width: 46
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 019b0534478dd74d0800000000000000
+      internalID: -3135111771722827504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_24
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 93
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0270cd6a2a71e230800000000000000
+      internalID: 3666345894304838157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_25
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 48
+        width: 114
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c2132f2cfe64e510800000000000000
+      internalID: 1577507798888157893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_26
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 45
+        width: 90
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d8b3a9da62efc150800000000000000
+      internalID: 5895179385797064916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_27
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 61
+        width: 31
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f295f3c36f62cc170800000000000000
+      internalID: 8199971860549425455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble_pop_one_spritesheet_512px_by_512px_per_frame_28
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 7
+        width: 67
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa91bafe9f86a39a0800000000000000
+      internalID: -6252569709973399121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

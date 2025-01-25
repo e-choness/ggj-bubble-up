@@ -2,12 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Game
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(CircleCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
     public class Bubble : MonoBehaviour
     {
         [Header("Physics")]
@@ -27,12 +32,14 @@ namespace Game
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
         public UnityEvent onLockedInCenter = new();
+        public UnityEvent onPop = new();
     
         // Components
         private SpriteRenderer _spriteRenderer;
         private CircleCollider2D _collider;
         private Rigidbody2D _rigidbody;
         private AudioSource _audioSource;
+        private Animator _animator;
 
         [HideInInspector] public bool isLocked {get; private set;}
 
@@ -44,6 +51,7 @@ namespace Game
             _collider = GetComponent<CircleCollider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _audioSource = GetComponent<AudioSource>();
+            _animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -54,6 +62,11 @@ namespace Game
             LockPositionIfAtCenter();
         }
     
+        public void Pop()
+        {
+            _animator.SetBool("isPopped", true);
+            onPop.Invoke();
+        }
 
         #region Color
 
@@ -83,6 +96,7 @@ namespace Game
             transform.position = target;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
+            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
             onLockedInCenter.Invoke();
         }
 
@@ -96,9 +110,27 @@ namespace Game
                 if (IsSameColor(other)) onCollisionWithSameColor.Invoke();
                 else onCollisionWithDifferentColor.Invoke();
                 _audioSource.Play();
+                if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
             }
         }
         #endregion
     
     }
+
+
+    #if UNITY_EDITOR
+    [CustomEditor(typeof(Bubble))]
+    public class BubbleEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Pop")) (target as Bubble).Pop();
+        }
+    }
+    #endif
 }
+
+
+
+

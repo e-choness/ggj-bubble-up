@@ -31,9 +31,10 @@ namespace Game
         public UnityEvent onCollision = new();
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
+        public UnityEvent onCollisionOutsideMainBubble = new();
         public UnityEvent onLockedInCenter = new();
         public UnityEvent onPop = new();
-    
+        
         // Components
         private SpriteRenderer _spriteRenderer;
         private CircleCollider2D _collider;
@@ -42,6 +43,8 @@ namespace Game
         private Animator _animator;
 
         [HideInInspector] public bool isLocked {get; private set;}
+
+        [HideInInspector] public List<Bubble> neighbors = new List<Bubble>();
 
         //potentially use the same value for all the vector values
 
@@ -65,7 +68,28 @@ namespace Game
         public void Pop()
         {
             _animator.SetBool("isPopped", true);
+            foreach (Bubble neighbor in neighbors.ToArray())
+            {
+                if (IsSameColor(neighbor))
+                {
+                    Disconnect(neighbor);
+                    neighbor.Pop();
+                }
+            }
+
             onPop.Invoke();
+        }
+
+        public void Connect(Bubble other)
+        {
+            if (!neighbors.Contains(other)) neighbors.Add(other);
+            if (!other.neighbors.Contains(this)) other.neighbors.Add(this);
+        }
+
+        public void Disconnect(Bubble other)
+        {
+            if (neighbors.Contains(other)) neighbors.Remove(other);
+            if (other.neighbors.Contains(this)) other.neighbors.Remove(this);
         }
 
         #region Color
@@ -81,7 +105,7 @@ namespace Game
 
         #region Physics
 
-        public float GetRadius() => _collider.radius;
+        public float GetRadius() => (transform.TransformPoint(new Vector2(_collider.radius, 0f)) - transform.position).magnitude;
 
         private void SetVelocity()
         {
@@ -107,12 +131,55 @@ namespace Game
             if (other != null)
             {
                 velocity = 0f; // "sticky" behavior, no jiggling
-                if (IsSameColor(other)) onCollisionWithSameColor.Invoke();
-                else onCollisionWithDifferentColor.Invoke();
+                bool sameColor = IsSameColor(other);
+
+                Connect(other);
+
                 _audioSource.Play();
-                if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+                
+                Vector3 center = System.SpawnManager.Instance.transform.position;
+                float dist = (transform.position - center).magnitude;
+                if (dist + GetRadius() >= MainBubble.Instance.GetRadius())
+                {
+                    // Pop will trigger a chain reaction on all the neighbors as needed
+                    if (sameColor) Pop();
+                    else // TODO: game over
+                    {
+                        throw new System.Exception("Game Over");
+                    }
+
+                    onCollisionOutsideMainBubble.Invoke();
+                }
+                else
+                {
+                    if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+                }
+                
+                if (sameColor) onCollisionWithSameColor.Invoke();
+                else onCollisionWithDifferentColor.Invoke();
             }
         }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            Bubble other = collision.collider.GetComponent<Bubble>();
+            if (other != null)
+            {
+                Disconnect(other);
+            }
+        }
+        #endregion
+
+        #region Editor
+        #if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            Color previous = Handles.color;
+            Handles.color = Color.green;
+            Handles.DrawWireDisc(transform.position, transform.forward, GetRadius());
+            Handles.color = previous;
+        }
+        #endif
         #endregion
     
     }

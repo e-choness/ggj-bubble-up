@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace System
@@ -7,7 +8,8 @@ namespace System
         /// <summary>
         /// An event to broadcast score changes
         /// </summary>
-        public Action<int> OnScoreChanged;
+        public Action<int> OnCurrentScoreChanged;
+        public Action<int> OnHighestScoreChanged;
 
         private int _currentScore;
         private int _highestScore;
@@ -15,8 +17,9 @@ namespace System
         private const string CurrentScoreKey = "CurrentScore";
         private const string HighestScoreKey = "HighestScore";
 
-        private void Start()
+        public override void Awake()
         {
+            base.Awake();
             InitializeScores();
         }
 
@@ -24,9 +27,11 @@ namespace System
         {
             // On the current game start the score should be 0
             _currentScore = 0;
+            OnCurrentScoreChanged?.Invoke(_currentScore);
             
             // Load the players previous highest score
             _highestScore = LoadScore(HighestScoreKey);
+            OnHighestScoreChanged?.Invoke(_highestScore);
         }
 
         public void CalculateScore(int change)
@@ -36,10 +41,13 @@ namespace System
             if(_currentScore < 0)
                 _currentScore = 0;
             
-            if(_currentScore > _highestScore)
+            OnCurrentScoreChanged?.Invoke(_currentScore);
+
+            if (_currentScore > _highestScore)
+            {
                 _highestScore = _currentScore;
-            
-            OnScoreChanged?.Invoke(_currentScore);
+                OnHighestScoreChanged?.Invoke(_highestScore);
+            }
         }
         
         public void EndGameScores()
@@ -57,5 +65,24 @@ namespace System
         {
             return PlayerPrefs.GetInt(scoreKey);
         }
+
+        #region Test - delete later
+
+        private void Start()
+        {
+            // StartCoroutine(IncrementScore());
+        }
+
+        private IEnumerator IncrementScore()
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                CalculateScore(1);
+                Debug.Log($"Current score: {_currentScore}");
+                yield return new WaitForSeconds(1);
+            }
+        }
+
+        #endregion
     }
 }

@@ -104,14 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  collider: {fileID: 3385970943473734895}
-  body: {fileID: 3895469788322439511}
   growthRate: {x: 0.005, y: 0.005, z: 1}
   shrinkRate: {x: -0.000001, y: -0.000001, z: 1}
   centralLockingFactor: 0.5
   maxSize: 3
   minSize: 0.25
-  initialForce: 5
   isMouseDown: 0
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
@@ -122,6 +119,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onCollisionWithSameColor:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionWithDifferentColor:
     m_PersistentCalls:
       m_Calls: []
   onLockedInCenter:
@@ -162,7 +162,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.28
+  m_Radius: 1.84
 --- !u!50 &3895469788322439511
 Rigidbody2D:
   serializedVersion: 5

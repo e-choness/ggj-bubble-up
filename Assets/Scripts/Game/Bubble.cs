@@ -129,6 +129,8 @@ namespace Game
 
         #region Physics
 
+        public float GetRadius() => _collider.radius;
+
         private void SetVelocity()
         {
             Vector3 direction = (System.SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
@@ -138,8 +140,7 @@ namespace Game
         private void LockPositionIfAtCenter()
         {
             Vector3 target = System.SpawnManager.Instance.transform.position;
-            if ((transform.position - target).sqrMagnitude > centralLockingFactor * centralLockingFactor) return;
-            //velocity = 0f;
+            if ((transform.position - target).magnitude > GetRadius() * centralLockingFactor) return;
             transform.position = target;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
@@ -152,7 +153,7 @@ namespace Game
             Bubble other = collision.collider.GetComponent<Bubble>();
             if (other != null)
             {
-                velocity = 0f;
+                velocity = 0f; // "sticky" behavior, no jiggling
                 if (IsSameColor(other)) onCollisionWithSameColor.Invoke();
                 else onCollisionWithDifferentColor.Invoke();
             }

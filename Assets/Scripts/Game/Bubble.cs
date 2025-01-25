@@ -2,12 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Game
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(CircleCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
     public class Bubble : MonoBehaviour
     {
         [Header("Physics")]
@@ -26,14 +31,20 @@ namespace Game
         public UnityEvent onCollision = new();
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
+        public UnityEvent onCollisionOutsideMainBubble = new();
         public UnityEvent onLockedInCenter = new();
-    
+        public UnityEvent onPop = new();
+        
         // Components
         private SpriteRenderer _spriteRenderer;
         private CircleCollider2D _collider;
         private Rigidbody2D _rigidbody;
+        private AudioSource _audioSource;
+        private Animator _animator;
 
         [HideInInspector] public bool isLocked {get; private set;}
+
+        [HideInInspector] public List<Bubble> neighbors = new List<Bubble>();
 
         //potentially use the same value for all the vector values
 
@@ -42,6 +53,8 @@ namespace Game
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<CircleCollider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            _audioSource = GetComponent<AudioSource>();
+            _animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -52,6 +65,32 @@ namespace Game
             LockPositionIfAtCenter();
         }
     
+        public void Pop()
+        {
+            _animator.SetBool("isPopped", true);
+            foreach (Bubble neighbor in neighbors.ToArray())
+            {
+                if (IsSameColor(neighbor))
+                {
+                    Disconnect(neighbor);
+                    neighbor.Pop();
+                }
+            }
+
+            onPop.Invoke();
+        }
+
+        public void Connect(Bubble other)
+        {
+            if (!neighbors.Contains(other)) neighbors.Add(other);
+            if (!other.neighbors.Contains(this)) other.neighbors.Add(this);
+        }
+
+        public void Disconnect(Bubble other)
+        {
+            if (neighbors.Contains(other)) neighbors.Remove(other);
+            if (other.neighbors.Contains(this)) other.neighbors.Remove(this);
+        }
 
         #region Color
 
@@ -66,7 +105,7 @@ namespace Game
 
         #region Physics
 
-        public float GetRadius() => _collider.radius;
+        public float GetRadius() => (transform.TransformPoint(new Vector2(_collider.radius, 0f)) - transform.position).magnitude;
 
         private void SetVelocity()
         {
@@ -81,6 +120,7 @@ namespace Game
             transform.position = target;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
+            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
             onLockedInCenter.Invoke();
         }
 
@@ -91,11 +131,73 @@ namespace Game
             if (other != null)
             {
                 velocity = 0f; // "sticky" behavior, no jiggling
-                if (IsSameColor(other)) onCollisionWithSameColor.Invoke();
+                bool sameColor = IsSameColor(other);
+
+                Connect(other);
+
+                _audioSource.Play();
+                
+                Vector3 center = System.SpawnManager.Instance.transform.position;
+                float dist = (transform.position - center).magnitude;
+                if (dist + GetRadius() >= MainBubble.Instance.GetRadius())
+                {
+                    // Pop will trigger a chain reaction on all the neighbors as needed
+                    if (sameColor) Pop();
+                    else // TODO: game over
+                    {
+                        throw new System.Exception("Game Over");
+                    }
+
+                    onCollisionOutsideMainBubble.Invoke();
+                }
+                else
+                {
+                    if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+                }
+                
+                if (sameColor) onCollisionWithSameColor.Invoke();
                 else onCollisionWithDifferentColor.Invoke();
             }
         }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            Bubble other = collision.collider.GetComponent<Bubble>();
+            if (other != null)
+            {
+                Disconnect(other);
+            }
+        }
+        #endregion
+
+        #region Editor
+        #if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            Color previous = Handles.color;
+            Handles.color = Color.green;
+            Handles.DrawWireDisc(transform.position, transform.forward, GetRadius());
+            Handles.color = previous;
+        }
+        #endif
         #endregion
     
     }
+
+
+    #if UNITY_EDITOR
+    [CustomEditor(typeof(Bubble))]
+    public class BubbleEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Pop")) (target as Bubble).Pop();
+        }
+    }
+    #endif
 }
+
+
+
+

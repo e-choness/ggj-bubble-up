@@ -19,7 +19,7 @@ public class SpawnManager : MonoBehaviour
     /// <summary>
     /// A pool for pre-instantiated bubbles
     /// </summary>
-    private readonly Queue<GameObject> _bubblePool = new();
+    private Queue<GameObject> _bubblePool;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -38,12 +38,14 @@ public class SpawnManager : MonoBehaviour
 
     private void InitializeBubblePool()
     {
-        for (int i = 0; i < spawnLimit; i++)
+        _bubblePool = new();
+        for (var i = 0; i < spawnLimit; i++)
         {
             var bubble = Instantiate(bubblePrefab, transform);
             bubble.SetActive(false);
             _bubblePool.Enqueue(bubble);
         }
+        Debug.Log($"Spawning {initialNumberOfSpawns} bubbles");
     }
 
     private void SpawnInitialBubbles()
@@ -82,7 +84,7 @@ public class SpawnManager : MonoBehaviour
 
     private Vector2 GetRandomSpawnPosition()
     {
-        var main = Camera.main;
+        var main = Camera.current;
         var screenHeight = main.orthographicSize;
         var screenWidth = main.aspect * main.orthographicSize;
         

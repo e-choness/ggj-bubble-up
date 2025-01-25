@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+namespace UI
 {
-    public void GoToMainMenu()
+    public class UI : MonoBehaviour
     {
-        if (SceneController.Instance == null) throw new System.Exception("Missing SceneController singleton in the scene");
-        SceneController.Instance.GoToMainMenu();
+        public void GoToMainMenu()
+        {
+            if (SceneController.Instance == null) throw new Exception("Missing SceneController singleton in the scene");
+            SceneController.Instance.GoToMainMenu();
+        }
     }
 }

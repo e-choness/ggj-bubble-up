@@ -63,7 +63,7 @@ namespace System
 
         private static int LoadScore(string scoreKey)
         {
-            return PlayerPrefs.GetInt(scoreKey);
+            return PlayerPrefs.GetInt(scoreKey, 0);
         }
 
         #region Test - delete later

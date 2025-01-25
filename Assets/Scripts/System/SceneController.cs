@@ -20,22 +20,34 @@ namespace System
     /// </summary>
     public class SceneController : SingletonPersistent<SceneController>
     {
+        public static SceneIndex CurrentScene { get; private set; }  
         public static void LoadGameScene()
         {
             Debug.Log("Loading the game...");
+            CurrentScene = SceneIndex.GameScene;
             SceneManager.LoadScene((int)SceneIndex.GameScene);
         }
 
         public static void LoadMainMenu()
         {
-            Debug.Log($"Loading the main menu...");
+            Debug.Log("Loading the main menu...");
+            CurrentScene = SceneIndex.MainMenu;
             SceneManager.LoadScene((int)SceneIndex.MainMenu);
         }
 
         public static void LoadGameOver()
         {
-            Debug.Log($"Loading the game over...");
+            Debug.Log("Loading the game over...");
+            CurrentScene = SceneIndex.GameOver;
             SceneManager.LoadScene((int)SceneIndex.GameOver);
+        }
+
+        public static void Load(SceneIndex index)
+        {
+            var sceneNum = (int)index;
+            CurrentScene = index;
+            SceneManager.LoadScene(sceneNum);
+            Debug.Log($"Loading the {index.ToString()}");
         }
 
         public static void QuitGame()

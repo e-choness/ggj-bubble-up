@@ -11,8 +11,12 @@ namespace UI
 
         private void Start()
         {
+            
             ScoreManager.Instance.OnCurrentScoreChanged += DisplayCurrentScore;
             ScoreManager.Instance.OnHighestScoreChanged += DisplayHighestScore;
+
+            if (SceneController.CurrentScene == SceneIndex.MainMenu)
+                currentScoreText.text = "";
         }
 
         private void OnDisable()
@@ -23,7 +27,9 @@ namespace UI
 
         private void DisplayCurrentScore(int currentSore)
         {
-            currentScoreText.text = $"Current Score: {currentSore}" ;
+            Debug.Log($"Current scene: {SceneController.CurrentScene}");
+            currentScoreText.text = SceneController.CurrentScene == SceneIndex.MainMenu ? 
+                "" : $"Current Score: {currentSore}";
         }
 
         private void DisplayHighestScore(int highestScore)

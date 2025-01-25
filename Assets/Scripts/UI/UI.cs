@@ -8,7 +8,7 @@ namespace UI
         public void GoToMainMenu()
         {
             if (SceneController.Instance == null) throw new Exception("Missing SceneController singleton in the scene");
-            SceneController.Instance.GoToMainMenu();
+            SceneController.LoadMainMenu();
         }
     }
 }

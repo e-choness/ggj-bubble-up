@@ -1,38 +1,50 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace System
 {
     /// <summary>
+    /// Look up to the Files -> Build Profiles for Scene Indexes
+    /// If anything changes please change accordingly
+    /// </summary>
+    public enum SceneIndex
+    {
+        MainMenu = 0,
+        GameScene = 1,
+        GameOver = 2
+    }
+    
+    /// <summary>
     /// Singleton that controls scene changes. Use the Instance field.
     /// </summary>
     public class SceneController : SingletonPersistent<SceneController>
     {
-        [SerializeField] private string mainMenuName;
-        [SerializeField] private string gameSceneName;
-        [SerializeField] private string gameOverScene;
-
-        public UnityEvent onGoToMainMenu = new();
-        public UnityEvent onGoToGameScene = new();
-        public UnityEvent onGoToGameOver = new();
-
-        public void GoToGameScene()
+        public static void LoadGameScene()
         {
-            SceneManager.LoadScene(gameSceneName);
-            onGoToGameScene.Invoke();
+            Debug.Log("Loading the game...");
+            SceneManager.LoadScene((int)SceneIndex.GameScene);
         }
 
-        public void GoToMainMenu()
+        public static void LoadMainMenu()
         {
-            SceneManager.LoadScene(mainMenuName);
-            onGoToMainMenu.Invoke();
+            Debug.Log($"Loading the main menu...");
+            SceneManager.LoadScene((int)SceneIndex.MainMenu);
         }
 
-        public void GoToGameOver()
+        public static void LoadGameOver()
         {
-            SceneManager.LoadScene(gameOverScene);
-            onGoToGameOver.Invoke();
+            Debug.Log($"Loading the game over...");
+            SceneManager.LoadScene((int)SceneIndex.GameOver);
+        }
+
+        public static void QuitGame()
+        {
+            Debug.Log("Quitting Game");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }

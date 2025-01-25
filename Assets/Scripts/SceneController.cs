@@ -10,9 +10,11 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField] private string mainMenuName;
     [SerializeField] private string gameSceneName;
+    [SerializeField] private string gameOverScene;
 
     public UnityEvent onGoToMainMenu = new UnityEvent();
     public UnityEvent onGoToGameScene = new UnityEvent();
+    public UnityEvent onGoToGameOver = new UnityEvent();
 
     public static SceneController Instance;
 
@@ -26,10 +28,18 @@ public class SceneController : MonoBehaviour
     public void GoToGameScene()
     {
         SceneManager.LoadScene(gameSceneName);
+        onGoToGameScene.Invoke();
     }
 
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(mainMenuName);
+        onGoToMainMenu.Invoke();
+    }
+
+    public void GoToGameOver()
+    {
+        SceneManager.LoadScene(gameOverScene);
+        onGoToGameOver.Invoke();
     }
 }

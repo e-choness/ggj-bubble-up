@@ -5,21 +5,29 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    /// <summary>
+    /// Bubble prefab to for spawning
+    /// </summary>
     [SerializeField] private GameObject bubblePrefab;
     
     [SerializeField] private float secondsBetweenSpawns = 30.0f;
     
+    /// <summary>
+    /// The initial number of bubbles to spawn
+    /// </summary>
     [SerializeField] private int initialNumberOfSpawns = 5;
     
+    /// <summary>
+    /// The maximum number of bubbles to spawn
+    /// Also is the object pool limit
+    /// </summary>
     [SerializeField] private int spawnLimit = 20;
-
-    [SerializeField] private float initialForce = 5f;
 
     [SerializeField, Min(0f)] private float spawnRadius;
 
-    [SerializeField] private List<Sprite> sprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> sprites = new();
 
-    private List<float> previousSpawnAngles = new List<float>();
+    private List<float> previousSpawnAngles = new();
     
     private Vector2 SpawnRange => GetRandomSpawnPosition();
     
@@ -44,7 +52,10 @@ public class SpawnManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    void OnDrawGizmos()
+    /// <summary>
+    /// For debugging purposes
+    /// </summary>
+    private void OnDrawGizmos()
     {
         Color previous = Handles.color;
         Handles.color = Color.yellow;
@@ -53,18 +64,13 @@ public class SpawnManager : MonoBehaviour
     }
 #endif
 
-    private void SetRandomBubbleColor(GameObject bubble)
-    {
-        bubble.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count - 1)];
-    }
-
     private void InitializeBubblePool()
     {
-        _bubblePool = new();
-        for (int i = 0; i < spawnLimit; i++)
+        _bubblePool = new Queue<GameObject>();
+        for (var i = 0; i < spawnLimit; i++)
         {
-            GameObject bubble = Instantiate(bubblePrefab, transform);
-            SetRandomBubbleColor(bubble);
+            var bubble = Instantiate(bubblePrefab, transform);
+            bubble.GetComponent<Bubble>().SetRandomColor(sprites);
             bubble.SetActive(false);
             _bubblePool.Enqueue(bubble);
         }
@@ -73,7 +79,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnInitialBubbles()
     {
-        for (int i = 0; i < initialNumberOfSpawns; i++)
+        for (var i = 0; i < initialNumberOfSpawns; i++)
         {
             var spawnPosition = GetRandomSpawnPosition();
             SpawnBubble(spawnPosition);
@@ -97,27 +103,24 @@ public class SpawnManager : MonoBehaviour
     {
         if (_bubblePool.Count != 0)
         {
-            GameObject bubble = _bubblePool.Dequeue();
-            bubble.transform.position = position;
-            Vector3 direction = (transform.position - bubble.transform.position).normalized; // destination - origin
-            Rigidbody2D rigidbody = bubble.GetComponent<Rigidbody2D>();
-            Debug.Log(direction * initialForce);
+            var bubble = _bubblePool.Dequeue();
             bubble.SetActive(true);
-            rigidbody.AddForce(direction * initialForce, ForceMode2D.Force);
+            bubble.GetComponent<Bubble>().ApplyInitialForce(transform.position, position);
+            return;
         }
-        
+
         Debug.LogWarning("No bubbles in the object pool.");
     }
 
     private Vector2 GetRandomSpawnPosition()
     {
+        var theta = Random.Range(0f, 2f * Mathf.PI);
+        var randomX = spawnRadius * Mathf.Cos(theta);
+        var randomY = spawnRadius * Mathf.Sin(theta);
+        
         //Camera main = Camera.current;
         //float screenHeight = main.orthographicSize;
         //float screenWidth = main.aspect * screenHeight;
-
-        float theta = Random.Range(0f, 2f * Mathf.PI);
-        float randomX = spawnRadius * Mathf.Cos(theta);
-        float randomY = spawnRadius * Mathf.Sin(theta);
         
         //var randomX = Random.Range(-screenWidth, screenWidth);
         //var randomY = Random.Range(-screenHeight, screenHeight);

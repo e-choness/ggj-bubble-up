@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bubble : MonoBehaviour
 {    
     public new CircleCollider2D collider;
@@ -10,16 +13,18 @@ public class Bubble : MonoBehaviour
     public Vector3 shrinkRate = new Vector3(-0.000001f, -0.000001f, 1);
     public float maxSize = 3;
     public double minSize = 0.25;
+    
+    [SerializeField] private float initialForce = 5f;
 
     public bool isMouseDown;
 
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     //potentially use the same value for all the vector values
 
-    void Awake()
+    private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -36,6 +41,8 @@ public class Bubble : MonoBehaviour
         */
     }
 
+    #region Controls
+
     void OnMouseDrag()
     {
         isMouseDown = true;
@@ -48,6 +55,12 @@ public class Bubble : MonoBehaviour
         isMouseDown = false;
         Debug.Log("off bubble");
     }
+
+    #endregion
+    
+
+    #region Movement
+
     void Expand()
     {
         Vector3 newSize = transform.localScale + growthRate;
@@ -80,6 +93,30 @@ public class Bubble : MonoBehaviour
     //Movement - bubble rises or falls depending on the base size
     //Explode/Burst - when the bubble bursts
 
+    #endregion
+    
 
-    public bool IsSameColor(Bubble other) => spriteRenderer.sprite == other.spriteRenderer.sprite;
+    #region Color
+
+    public bool IsSameColor(Bubble other) => _spriteRenderer.sprite == other._spriteRenderer.sprite;
+
+    public void SetRandomColor(List<Sprite> sprites)
+    {
+        _spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count - 1)];
+    }
+
+    #endregion
+
+    #region Physics
+
+    public void ApplyInitialForce(Vector2 originPosition, Vector2 spawnPosition)
+    {
+        transform.position = spawnPosition;
+        var direction = (originPosition - spawnPosition).normalized; // destination - origin
+        GetComponent<Rigidbody2D>().AddForce(direction * initialForce, ForceMode2D.Force);
+        Debug.Log($"Applying Initial force: {direction * initialForce}");
+    }
+
+    #endregion
+    
 }

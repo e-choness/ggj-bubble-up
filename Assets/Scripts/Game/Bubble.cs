@@ -42,6 +42,7 @@ namespace Game
         private SpriteRenderer _spriteRenderer;
         private CircleCollider2D _collider;
         private Rigidbody2D _rigidbody;
+        private AudioSource _audioSource;
 
         [HideInInspector] public bool isLocked {get; private set;}
 
@@ -52,6 +53,7 @@ namespace Game
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<CircleCollider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -156,6 +158,7 @@ namespace Game
                 velocity = 0f; // "sticky" behavior, no jiggling
                 if (IsSameColor(other)) onCollisionWithSameColor.Invoke();
                 else onCollisionWithDifferentColor.Invoke();
+                _audioSource.Play();
             }
         }
         #endregion

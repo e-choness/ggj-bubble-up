@@ -110,9 +110,9 @@ namespace System
         {
             if (_bubblePool.Count != 0)
             {
-                var bubble = _bubblePool.Dequeue();
+                GameObject bubble = _bubblePool.Dequeue();
+                bubble.transform.position = position;
                 bubble.SetActive(true);
-                bubble.GetComponent<Bubble>().ApplyInitialForce(transform.position, position);
                 return;
             }
 

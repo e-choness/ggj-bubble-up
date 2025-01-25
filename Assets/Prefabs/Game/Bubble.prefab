@@ -103,14 +103,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 3385970943473734895}
-  body: {fileID: 3895469788322439511}
+  velocity: 50
   growthRate: {x: 0.005, y: 0.005, z: 1}
   shrinkRate: {x: -0.000001, y: -0.000001, z: 1}
+  centralLockingFactor: 0.5
   maxSize: 3
   minSize: 0.25
-  initialForce: 5
   isMouseDown: 0
+  colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.028794289, a: 1}
+  - {r: 0.9469855, g: 1, b: 0, a: 1}
+  - {r: 0.6704478, g: 0, b: 1, a: 1}
+  onCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionWithSameColor:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionWithDifferentColor:
+    m_PersistentCalls:
+      m_Calls: []
+  onLockedInCenter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &3385970943473734895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -146,7 +162,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.28
+  m_Radius: 1.84
 --- !u!50 &3895469788322439511
 Rigidbody2D:
   serializedVersion: 5
@@ -173,7 +189,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &8142524272271695943
 Animator:
   serializedVersion: 7

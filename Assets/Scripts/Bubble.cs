@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Bubble : MonoBehaviour
 {    
     public new CircleCollider2D collider;
@@ -12,17 +13,13 @@ public class Bubble : MonoBehaviour
 
     public bool isMouseDown;
 
+    [HideInInspector] public SpriteRenderer spriteRenderer;
+
     //potentially use the same value for all the vector values
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     void Awake()
     {
-     
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -82,4 +79,7 @@ public class Bubble : MonoBehaviour
     //Expand - bubble when player clicks and holds
     //Movement - bubble rises or falls depending on the base size
     //Explode/Burst - when the bubble bursts
+
+
+    public bool IsSameColor(Bubble other) => spriteRenderer.sprite == other.spriteRenderer.sprite;
 }

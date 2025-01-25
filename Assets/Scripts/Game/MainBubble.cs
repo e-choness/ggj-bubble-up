@@ -3,12 +3,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Game
 {
     /// <summary>
     /// The player controls this bubble
     /// </summary>
+    [RequireComponent(typeof(CircleCollider2D))]
     public class MainBubble : MonoBehaviour
     {
         /// <summary>
@@ -29,6 +33,16 @@ namespace Game
             Right = 1 << 1,
         }
 
+        private CircleCollider2D _collider;
+        public new CircleCollider2D collider 
+        {
+            get
+            {
+                if (_collider == null) _collider = GetComponent<CircleCollider2D>();
+                return _collider;
+            }
+        }
+
         public static MainBubble Instance;
 
         public static List<Bubble> bubbles = new();
@@ -37,9 +51,19 @@ namespace Game
         void Awake()
         {
             if (Instance != null) Destroy(gameObject);
-            else Instance = this;
+            else 
+            {
+                Instance = this;
+                _audioSource = GetComponent<AudioSource>();
+            }
+        }
 
-            _audioSource = GetComponent<AudioSource>();
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) StartRotateLeft();
+            else if (Input.GetKeyUp(KeyCode.LeftArrow)) StopRotateLeft();
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) StartRotateRight();
+            else if (Input.GetKeyUp(KeyCode.RightArrow)) StopRotateRight();
         }
 
         void FixedUpdate()
@@ -50,16 +74,23 @@ namespace Game
             bubbleContainer.transform.Rotate(transform.forward, speed * Time.fixedDeltaTime); 
         }
 
-        public void RotateLeft(InputAction.CallbackContext context)
+        public float GetRadius() => (transform.TransformPoint(new Vector2(collider.radius, 0f)) - transform.position).magnitude;
+
+        public void StartRotateLeft()
         {
-            Debug.Log(context.started + " " + context.canceled);
-            if (context.started) rotation |= Rotation.Left;
-            else if (context.canceled) rotation &= ~Rotation.Left;
+            rotation |= Rotation.Left;
         }
-        public void RotateRight(InputAction.CallbackContext context)
+        public void StopRotateLeft()
         {
-            if (context.started) rotation |= Rotation.Right; 
-            else if (context.canceled) rotation &= ~Rotation.Right;
+            rotation &= ~Rotation.Left;
+        }
+        public void StartRotateRight()
+        {
+            rotation |= Rotation.Right;
+        }
+        public void StopRotateRight()
+        {
+            rotation &= ~Rotation.Right;
         }
 
         public static void AddBubble(Bubble bubble)
@@ -79,5 +110,17 @@ namespace Game
         {
             _audioSource.Play();
         }
+
+        #region Editor
+        #if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            Color previous = Handles.color;
+            Handles.color = Color.cyan;
+            Handles.DrawWireDisc(transform.position, transform.forward, GetRadius());
+            Handles.color = previous;
+        }
+        #endif
+        #endregion
     }
 }

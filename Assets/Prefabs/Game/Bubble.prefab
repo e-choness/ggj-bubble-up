@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,12 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  growthRate: {x: 0.005, y: 0.005, z: 1}
-  shrinkRate: {x: -0.000001, y: -0.000001, z: 1}
   centralLockingFactor: 0.5
-  maxSize: 3
-  minSize: 0.25
-  isMouseDown: 0
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0.028794289, a: 1}
@@ -118,28 +113,23 @@ MonoBehaviour:
   - {r: 0.6704478, g: 0, b: 1, a: 1}
   onCollision:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8300000, guid: f5c2dbcac2628e347ae6f374dbd2983c, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onCollisionWithSameColor:
     m_PersistentCalls:
       m_Calls: []
   onCollisionWithDifferentColor:
     m_PersistentCalls:
       m_Calls: []
+  onCollisionOutsideMainBubble:
+    m_PersistentCalls:
+      m_Calls: []
   onLockedInCenter:
     m_PersistentCalls:
       m_Calls: []
+  onPop:
+    m_PersistentCalls:
+      m_Calls: []
+  neighbors: []
 --- !u!58 &3385970943473734895
 CircleCollider2D:
   m_ObjectHideFlags: 0

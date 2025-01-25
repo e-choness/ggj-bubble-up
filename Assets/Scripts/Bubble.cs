@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -8,6 +9,7 @@ public class Bubble : MonoBehaviour
 {    
     public new CircleCollider2D collider;
     public Rigidbody2D body;
+    public Animator _animator;
     // public bool isExpanding;
     public Vector3 growthRate = new Vector3(0.005f, 0.005f, 1);
     public Vector3 shrinkRate = new Vector3(-0.000001f, -0.000001f, 1);
@@ -25,6 +27,7 @@ public class Bubble : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,18 +46,13 @@ public class Bubble : MonoBehaviour
 
     #region Controls
 
-    void OnMouseDrag()
+   /*  void OnMouseOver()
     {
+        _animator.SetBool("isPopped", true);
         isMouseDown = true;
         Expand();
         
-    }
-
-    void onMouseExit()
-    {
-        isMouseDown = false;
-        Debug.Log("off bubble");
-    }
+    } */
 
     #endregion
     

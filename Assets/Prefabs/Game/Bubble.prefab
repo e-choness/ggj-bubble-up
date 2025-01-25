@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5423090334679791361}
   - component: {fileID: 3385970943473734895}
   - component: {fileID: 3895469788322439511}
+  - component: {fileID: 8142524272271695943}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d9f0c523cc024974fb5620d309b3bb54, type: 3}
+  m_Sprite: {fileID: 50896866030303577, guid: 7f4ba20649e40104985f25c9735b76af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,19 +103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialForce: 50
+  collider: {fileID: 3385970943473734895}
+  body: {fileID: 3895469788322439511}
   growthRate: {x: 0.005, y: 0.005, z: 1}
   shrinkRate: {x: -0.000001, y: -0.000001, z: 1}
   maxSize: 3
   minSize: 0.25
+  initialForce: 5
   isMouseDown: 0
-  sprites:
-  - {fileID: 21300000, guid: cf35119f7b53e1c419bb1c7cb3af6dda, type: 3}
-  - {fileID: 21300000, guid: 3995627625e4d9d4386409a2bf99e8cc, type: 3}
-  - {fileID: 21300000, guid: c4797b928419e844aaef5d3f039aa7f3, type: 3}
-  - {fileID: 21300000, guid: 39cdb9ff05036254493f8b78679c69a0, type: 3}
-  - {fileID: 21300000, guid: 1652f2efa5721a446892d51b273576dc, type: 3}
-  - {fileID: 21300000, guid: db1bb1484620e8e4d8afff9f6d5c6514, type: 3}
 --- !u!58 &3385970943473734895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -145,7 +141,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -178,3 +174,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &8142524272271695943
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600533939137190105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3393ca8ad8c2ac24db91c283ded524ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class Window : MonoBehaviour
+namespace UI
 {
-    public void Toggle()
+    public class Window : MonoBehaviour
     {
-        gameObject.SetActive(!gameObject.activeInHierarchy);
+        public void Toggle()
+        {
+            gameObject.SetActive(!gameObject.activeInHierarchy);
+        }
     }
 }

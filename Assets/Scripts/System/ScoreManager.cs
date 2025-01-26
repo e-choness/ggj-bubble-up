@@ -32,13 +32,10 @@ namespace System
 
         private float comboTimer = 0f;
 
-        private List<ComboIndicator> comboIndicators = new();
-
         public override void Awake()
         {
             base.Awake();
             InitializeScores();
-            comboIndicators = new List<ComboIndicator>(FindObjectsByType<ComboIndicator>(FindObjectsInactive.Include, FindObjectsSortMode.None));
         }
 
         void Update()
@@ -50,7 +47,7 @@ namespace System
                 {
                     comboTimer = 0f;
                     ResetCombo();
-                    DisableComboIndicators();
+                    ComboIndicator.Instance.gameObject.SetActive(false);
                 }
             }
         }
@@ -109,22 +106,10 @@ namespace System
         {
             nCombos ++;
             comboTimer = 0f;
-            DisableComboIndicators();
-            EnableComboIndicators();
+            ComboIndicator.Instance.gameObject.SetActive(false);
+            ComboIndicator.Instance.gameObject.SetActive(true);
         } 
 
         public void ResetCombo() => nCombos = 0;
-
-        public void DisableComboIndicators()
-        {
-            foreach (ComboIndicator indicator in comboIndicators)
-                indicator.gameObject.SetActive(false);
-        }
-
-        public void EnableComboIndicators()
-        {
-            foreach (ComboIndicator indicator in comboIndicators)
-                indicator.gameObject.SetActive(true);
-        }
     }
 }

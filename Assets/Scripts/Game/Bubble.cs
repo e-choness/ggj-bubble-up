@@ -16,8 +16,11 @@ namespace Game
     [RequireComponent(typeof(Animator))]
     public class Bubble : MonoBehaviour
     {
+        [SerializeField] private float coyoteTime = 0.1f;
+
         [Header("Physics")]
-        [SerializeField, Min(0f)] private float velocity = 50f;
+        [SerializeField, Min(0f)] private float initialVelocity = 50f;
+        [SerializeField, Min(0f)] private float finalVelocity = 40f;
 
         /// <summary>
         /// When the bubble gets close to the center of the screen, it should "snap" into place and never move thereafter until it is popped.
@@ -142,10 +145,21 @@ namespace Game
 
         public float GetRadius() => (transform.TransformPoint(new Vector2(collider.radius, 0f)) - transform.position).magnitude;
 
+        private float GetVelocity()
+        {
+            float R = MainBubble.Instance.GetRadius();
+            float distToMainBubble = (transform.position - MainBubble.Instance.transform.position).magnitude;
+            float startRadius = R * MainBubble.Instance.velocityRadiusFactor;
+            float q = distToMainBubble - R;
+            float d = startRadius - R;
+            float progress = Mathf.Clamp(1f - (q - R) / d, 0f, 1f);
+            return Mathf.Lerp(initialVelocity, finalVelocity, progress);
+        }
+
         private void SetVelocity()
         {
             Vector3 direction = (System.SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
-            _rigidbody.linearVelocity = direction * velocity;
+            _rigidbody.linearVelocity = direction * GetVelocity();
         }
 
         private bool IsAtCenter()
@@ -193,6 +207,27 @@ namespace Game
             }
         }
 
+        private void HandleEdgeCaseDifferentColor()
+        {
+            if (!IsOutsideMainBubble()) return;
+            UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
+            if (pauseMenu != null)
+            {
+                pauseMenu.gameOverSign.SetActive(true);
+                pauseMenu.resumeButton.interactable = false;
+                pauseMenu.allowUnpause = false;
+                pauseMenu.TogglePause();
+            }
+            Debug.Log("GAME OVER");
+        }
+
+        private bool IsOutsideMainBubble()
+        {
+            Vector3 center = System.SpawnManager.Instance.transform.position;
+            float dist = (transform.position - center).magnitude;
+            return dist + GetRadius() >= MainBubble.Instance.GetRadius();
+        }
+
         void OnCollisionEnter2D(Collision2D collision)
         {
             onCollision.Invoke();
@@ -204,23 +239,13 @@ namespace Game
                 Connect(other);
                 if (firstCollision) _audioSource.Play();
                 
-                Vector3 center = System.SpawnManager.Instance.transform.position;
-                float dist = (transform.position - center).magnitude;
-                if (dist + GetRadius() >= MainBubble.Instance.GetRadius())
+                if (IsOutsideMainBubble())
                 {
                     // Pop will trigger a chain reaction on all the neighbors as needed
                     if (sameColor) Pop();
                     else // TODO: game over
                     {
-                        UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
-                        if (pauseMenu != null)
-                        {
-                            pauseMenu.gameOverSign.SetActive(true);
-                            pauseMenu.resumeButton.interactable = false;
-                            pauseMenu.allowUnpause = false;
-                            pauseMenu.TogglePause();
-                        }
-                        Debug.Log("GAME OVER");
+                        Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
                         return;
                     }
 

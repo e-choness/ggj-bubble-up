@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -47,6 +45,8 @@ namespace Game
 
         public static List<Bubble> bubbles = new();
         private AudioSource _audioSource;
+
+        public static Bubble centralBubble;
 
         void Awake()
         {

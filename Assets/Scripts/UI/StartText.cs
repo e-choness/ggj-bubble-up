@@ -7,7 +7,7 @@ public class StartText : MonoBehaviour
 {
     
     public TextMeshProUGUI startText;
-    public float displayDuration = 2f;
+    public float displayDuration = 1f;
     public float bounceDuration = 0.5f;
     public Vector3 startScale = Vector3.zero;
     public Vector3 targetScale = Vector3.one;

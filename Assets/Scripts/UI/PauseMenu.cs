@@ -30,19 +30,16 @@ namespace UI
         /// </summary>
         [HideInInspector] public bool allowUnpause = true;
 
+        private bool reenable = false;
+
         private void Start()
         {
             AssignListeners();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
-            MainBubble.Instance.OnGameEnd += DisplayGameOver;
-        }
-
-        private void OnDisable()
-        {
-            MainBubble.Instance.OnGameEnd -= DisplayGameOver;
+            if (reenable) resumeButton.interactable = true;
         }
 
         private void AssignListeners()
@@ -85,13 +82,14 @@ namespace UI
             TogglePause();
         }
 
-        private void DisplayGameOver()
+        public void DisplayGameOver()
         {
             // Delay the pop menu for [delayTime](default = 3 seconds), it can be configured on Pause Menu script
-            StartCoroutine(DelayMenu());
-            
+            //StartCoroutine(DelayMenu());
+
             gameOverBanner.SetActive(true);
             resumeButton.interactable = false;
+            reenable = true;
             allowUnpause = false;
             TogglePause();
         }

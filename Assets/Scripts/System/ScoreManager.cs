@@ -36,16 +36,13 @@ namespace System
             InitializeScores();
         }
 
-        private void Start()
+        void OnEnable()
         {
-            if (MainBubble.Instance != null) 
-                MainBubble.Instance.OnGameEnd += EndGameScores;
-        }
-
-        private void OnDisable()
-        {
-            if(MainBubble.Instance != null)
+            if (MainBubble.Instance != null)
+            {
                 MainBubble.Instance.OnGameEnd -= EndGameScores;
+                MainBubble.Instance.OnGameEnd += EndGameScores;
+            }
         }
 
         private void Update()

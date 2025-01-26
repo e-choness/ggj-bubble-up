@@ -219,7 +219,7 @@ namespace Game
         private void HandleEdgeCaseDifferentColor()
         {
             if (!IsOutsideMainBubble()) return;
-            
+
             MainBubble.Instance.OnGameEnd?.Invoke();
 
             Debug.Log("GAME OVER");

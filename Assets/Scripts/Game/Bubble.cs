@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,7 +17,7 @@ namespace Game
     public class Bubble : MonoBehaviour
     {
         [Header("Physics")]
-        [SerializeField] private float velocity = 50f;
+        [SerializeField, Min(0f)] private float velocity = 50f;
 
         /// <summary>
         /// When the bubble gets close to the center of the screen, it should "snap" into place and never move thereafter until it is popped.
@@ -33,8 +34,10 @@ namespace Game
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
         public UnityEvent onCollisionOutsideMainBubble = new();
-        public UnityEvent onLockedInCenter = new();
+        public UnityEvent onReachedCenter = new();
         public UnityEvent onPop = new();
+        public UnityEvent onBeforeCombo = new();
+        public UnityEvent onAfterCombo = new();
         
         // Components
         private SpriteRenderer _spriteRenderer;
@@ -70,15 +73,25 @@ namespace Game
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (isLocked) return;
-            SetVelocity();
-            LockPositionIfAtCenter();
+            if (!isLocked) SetVelocity();
+            if (IsAtCenter()) OnReachCenter();
+        }
+
+        void Reset()
+        {
+            _animator.SetBool("isPopped", false);
+            _audioSource.Stop();
+            if (isLocked) UnlockPosition();
+            neighbors.Clear();
+            firstCollision = true;
         }
     
         public void Pop()
         {
             _animator.SetBool("isPopped", true);
             Invoke(nameof(DestroyBubble), popAnimation.length);
+            
+            MainBubble.Instance.bubblesPoppedThisFrame.Add(this);
 
             foreach (Bubble neighbor in neighbors.ToArray())
             {
@@ -89,12 +102,17 @@ namespace Game
                 }
             }
 
+            if (MainBubble.centralBubble == this) MainBubble.centralBubble = null;
+
+            System.ScoreManager.Instance.ProcessBubblePop(this);
+
             onPop.Invoke();
         }
 
         private void DestroyBubble()
         {
-            Destroy(gameObject);
+            Reset();
+            System.SpawnManager.Instance.ReturnToPool(this);
         }
 
         public void Connect(Bubble other)
@@ -130,15 +148,50 @@ namespace Game
             _rigidbody.linearVelocity = direction * velocity;
         }
 
-        private void LockPositionIfAtCenter()
+        private bool IsAtCenter()
         {
             Vector3 target = System.SpawnManager.Instance.transform.position;
-            if ((transform.position - target).magnitude > GetRadius() * centralLockingFactor) return;
-            transform.position = target;
+            return (transform.position - target).magnitude <= GetRadius() * centralLockingFactor;
+        }
+
+        private void OnReachCenter()
+        {
+            LockPosition();
+            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+            if (MainBubble.centralBubble != this)
+            {
+                MainBubble.centralBubble = this;
+                ProcessCombo();
+            }
+            onReachedCenter.Invoke();
+        }
+
+        private void LockPosition()
+        {
+            transform.position = System.SpawnManager.Instance.transform.position;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
-            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
-            onLockedInCenter.Invoke();
+        }
+        private void UnlockPosition()
+        {
+            _rigidbody.constraints = RigidbodyConstraints2D.None;
+            isLocked = false;
+        }
+
+        private void ProcessCombo()
+        {
+            foreach (Bubble neighbor in neighbors)
+            {
+                if (IsSameColor(neighbor))
+                {
+                    onBeforeCombo.Invoke();
+                    System.ScoreManager.Instance.IncrementCombo();
+                    Pop();
+                    onAfterCombo.Invoke();
+                    return;
+                }
+            }
+            System.ScoreManager.Instance.ResetCombo();
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -147,7 +200,6 @@ namespace Game
             Bubble other = collision.collider.GetComponent<Bubble>();
             if (other != null)
             {
-                //velocity = 0f; // "sticky" behavior, no jiggling
                 bool sameColor = IsSameColor(other);
 
                 Connect(other);

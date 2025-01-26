@@ -124,15 +124,14 @@ namespace System
             var theta = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
             var randomX = spawnRadius * Mathf.Cos(theta);
             var randomY = spawnRadius * Mathf.Sin(theta);
-        
-            //Camera main = Camera.current;
-            //float screenHeight = main.orthographicSize;
-            //float screenWidth = main.aspect * screenHeight;
-        
-            //var randomX = Random.Range(-screenWidth, screenWidth);
-            //var randomY = Random.Range(-screenHeight, screenHeight);
-        
             return new Vector2(randomX, randomY);
+        }
+
+        public void ReturnToPool(Bubble bubble)
+        {
+            bubble.gameObject.SetActive(false);
+            bubble.transform.position = new Vector3(1000f, 1000f, transform.position.z);
+            _bubblePool.Enqueue(bubble.gameObject);
         }
     
         /// <summary>

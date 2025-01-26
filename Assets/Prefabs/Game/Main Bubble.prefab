@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   bubbleContainer: {fileID: 9091300268017787664}
+  velocityRadiusFactor: 2
   chainPopAudio: {fileID: 1579675156871290335}
   bubblesPoppedThisFrame: []
 --- !u!212 &3402908873422060739

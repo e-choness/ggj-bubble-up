@@ -21,6 +21,8 @@ namespace Game
 
         [SerializeField] private GameObject bubbleContainer;
 
+        public float velocityRadiusFactor = 2f;
+
         [Header("Audio")]
         [SerializeField] private AudioSource chainPopAudio;
 

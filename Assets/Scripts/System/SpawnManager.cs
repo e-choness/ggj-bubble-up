@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace System
 {
-    public class SpawnManager : SingletonPersistent<SpawnManager>
+    public class SpawnManager : Singleton<SpawnManager>
     {
         /// <summary>
         /// Bubble prefab to for spawning

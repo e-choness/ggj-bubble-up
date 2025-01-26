@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PlanetPink_0: 7206859993448160930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

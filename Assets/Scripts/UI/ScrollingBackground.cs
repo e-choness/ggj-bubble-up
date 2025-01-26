@@ -20,7 +20,7 @@ public class ScrollingBackground : MonoBehaviour
     void Update()
     {   
         // private float scrollz = scrollSpeed * Time.deltaTime/16;
-        Vector2 offset = _rawImage.uvRect.position + new Vector2(scrollSpeed * Time.deltaTime/12, scrollSpeed * Time.deltaTime/16);
+        Vector2 offset = _rawImage.uvRect.position + new Vector2(scrollSpeed * Time.deltaTime/24, scrollSpeed * Time.deltaTime/32);
 
         // offset.x %= 1;
         // offset.y %= 1;

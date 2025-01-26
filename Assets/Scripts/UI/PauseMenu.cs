@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI
@@ -20,46 +21,47 @@ namespace UI
 
         private void Start()
         {
-            InitializePanels();
             AssignListeners();
-        }
-
-        private void InitializePanels()
-        {
-            buttonContainer.SetActive(false);
-            guidePanel.SetActive(false);
         }
 
         private void AssignListeners()
         {
-            resumeButton.onClick.AddListener(ResumeGame);
+            resumeButton.onClick.AddListener(TogglePause);
             reStartButton.onClick.AddListener(SceneController.LoadGameScene);
-            guideButton.onClick.AddListener(DisplayGuide);
+            guideButton.onClick.AddListener(() => {
+                buttonContainer.SetActive(false);
+                guidePanel.SetActive(true);
+            });
             mainMenuButton.onClick.AddListener(SceneController.LoadMainMenu);
-            backToPauseButton.onClick.AddListener(PauseGame);
+            backToPauseButton.onClick.AddListener(() => {
+                guidePanel.SetActive(false);
+                buttonContainer.SetActive(true);
+            });
             exitButton.onClick.AddListener(SceneController.QuitGame);
         }
 
-        private void DisplayGuide()
+        public void TogglePause()
         {
-            buttonContainer.SetActive(false);
-            guidePanel.SetActive(true);
+            if (!gameObject.activeInHierarchy) // currently not paused
+            {
+                Time.timeScale = 0; // Stops time
+                buttonContainer.SetActive(true);
+                guidePanel.SetActive(false);
+                gameObject.SetActive(true);
+                Debug.Log("Game is now paused.");
+            }
+            else 
+            {
+                Time.timeScale = 1;
+                gameObject.SetActive(false);
+                Debug.Log("Game is now resumed.");
+            }
         }
 
-        public void PauseGame()
+        public void TogglePause(InputAction.CallbackContext context)
         {
-            Time.timeScale = 0; // Stops time
-            gameObject.SetActive(true);
-            buttonContainer.SetActive(true);
-            guidePanel.SetActive(false);
-            Debug.Log("Game is now paused.");
-        }
-
-        private void ResumeGame()
-        {
-            Time.timeScale = 1;
-            InitializePanels();
-            Debug.Log("Game is now resume.");
+            if (!context.performed) return;
+            TogglePause();
         }
     }
 }

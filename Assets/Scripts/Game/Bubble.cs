@@ -35,6 +35,7 @@ namespace Game
         [Header("Visuals")]
         [SerializeField] private AnimationClip popAnimation;
         public List<Color> colors = new();
+        [SerializeField] private SpriteRenderer glowEffect;
 
         public UnityEvent onCollision = new();
         public UnityEvent onCollisionWithSameColor = new();
@@ -90,6 +91,7 @@ namespace Game
         {
             _spriteRenderer.sprite = originalSprite;
             _animator.SetBool("isPopped", false);
+            if (glowEffect != null) glowEffect.enabled = true;
             _audioSource.Stop();
             if (isLocked) UnlockPosition();
             neighbors.Clear();
@@ -99,6 +101,7 @@ namespace Game
         public void Pop()
         {
             _animator.SetBool("isPopped", true);
+            if (glowEffect != null) glowEffect.enabled = false;
             Invoke(nameof(DestroyBubble), popAnimation.length);
             
             MainBubble.Instance.bubblesPoppedThisFrame.Add(this);

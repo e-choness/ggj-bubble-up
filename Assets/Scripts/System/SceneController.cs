@@ -1,3 +1,4 @@
+using Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,9 @@ namespace System
             CurrentScene = SceneIndex.GameScene;
             ScoreManager.Instance.InitializeScores();
             Time.timeScale = 1; // Make sure the game is running in case you use the pause menu to exit
+            
+            EndGameSaves(); // Make sure to save the high scores when the player exit the game scene
+            
             SceneManager.LoadScene((int)SceneIndex.GameScene);
         }
 
@@ -35,6 +39,9 @@ namespace System
             Debug.Log("Loading the main menu...");
             CurrentScene = SceneIndex.MainMenu;
             Time.timeScale = 1; // Make sure the game is running in case you use the pause menu to exit
+
+            EndGameSaves(); // Make sure to save the high scores when the player exit the game scene
+            
             SceneManager.LoadScene((int)SceneIndex.MainMenu);
         }
 
@@ -53,14 +60,25 @@ namespace System
             Debug.Log($"Loading the {index.ToString()}");
         }
 
+        private static void EndGameSaves()
+        {
+            if (MainBubble.Instance != null)
+            {
+                MainBubble.Instance.OnGameEnd?.Invoke();
+            }
+        }
+        
         public static void QuitGame()
         {
             Debug.Log("Quitting Game");
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
+            EndGameSaves();
             Application.Quit();
 #endif
         }
+
+        
     }
 }

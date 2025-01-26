@@ -16,7 +16,7 @@ namespace Game
     public class Bubble : MonoBehaviour
     {
         [Header("Physics")]
-        [SerializeField] private float velocity = 50f;
+        [SerializeField, Min(0f)] private float velocity = 50f;
 
         /// <summary>
         /// When the bubble gets close to the center of the screen, it should "snap" into place and never move thereafter until it is popped.
@@ -33,8 +33,10 @@ namespace Game
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
         public UnityEvent onCollisionOutsideMainBubble = new();
-        public UnityEvent onLockedInCenter = new();
+        public UnityEvent onReachedCenter = new();
         public UnityEvent onPop = new();
+        public UnityEvent onBeforeCombo = new();
+        public UnityEvent onAfterCombo = new();
         
         // Components
         private SpriteRenderer _spriteRenderer;
@@ -72,7 +74,7 @@ namespace Game
         {
             if (isLocked) return;
             SetVelocity();
-            LockPositionIfAtCenter();
+            if (IsAtCenter()) OnReachCenter();
         }
     
         public void Pop()
@@ -88,6 +90,8 @@ namespace Game
                     neighbor.Pop();
                 }
             }
+
+            if (MainBubble.centralBubble == this) MainBubble.centralBubble = null;
 
             onPop.Invoke();
         }
@@ -130,15 +134,43 @@ namespace Game
             _rigidbody.linearVelocity = direction * velocity;
         }
 
-        private void LockPositionIfAtCenter()
+        private bool IsAtCenter()
         {
             Vector3 target = System.SpawnManager.Instance.transform.position;
-            if ((transform.position - target).magnitude > GetRadius() * centralLockingFactor) return;
-            transform.position = target;
+            return (transform.position - target).magnitude <= GetRadius() * centralLockingFactor;
+        }
+
+        private void OnReachCenter()
+        {
+            LockPosition();
+            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+            if (MainBubble.centralBubble != this)
+            {
+                MainBubble.centralBubble = this;
+                ProcessCombo();
+            }
+            onReachedCenter.Invoke();
+        }
+
+        private void LockPosition()
+        {
+            transform.position = System.SpawnManager.Instance.transform.position;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
-            if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
-            onLockedInCenter.Invoke();
+        }
+
+        private void ProcessCombo()
+        {
+            foreach (Bubble neighbor in neighbors)
+            {
+                if (IsSameColor(neighbor))
+                {
+                    onBeforeCombo.Invoke();
+                    Pop();
+                    onAfterCombo.Invoke();
+                    return;
+                }
+            }
         }
 
         void OnCollisionEnter2D(Collision2D collision)

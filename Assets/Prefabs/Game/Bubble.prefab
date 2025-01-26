@@ -105,14 +105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  centralLockingFactor: 0.5
+  centralLockingFactor: 1
   popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0.028794289, a: 1}
   - {r: 0.9469855, g: 1, b: 0, a: 1}
   - {r: 0.6704478, g: 0, b: 1, a: 1}
-  collisionSpeedThreshold: 1
   onCollision:
     m_PersistentCalls:
       m_Calls: []
@@ -125,7 +124,7 @@ MonoBehaviour:
   onCollisionOutsideMainBubble:
     m_PersistentCalls:
       m_Calls: []
-  onLockedInCenter:
+  onReachedCenter:
     m_PersistentCalls:
       m_Calls: []
   onPop:

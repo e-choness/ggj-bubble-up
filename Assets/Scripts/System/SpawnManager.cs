@@ -149,6 +149,7 @@ namespace System
         public void ReturnToPool(Bubble bubble)
         {
             bubble.gameObject.SetActive(false);
+            bubble.transform.SetParent(transform);
             bubble.transform.position = new Vector3(1000f, 1000f, transform.position.z);
             _bubblePool.Enqueue(bubble.gameObject);
         }

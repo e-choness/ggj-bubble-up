@@ -148,10 +148,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8571763866571068178, guid: 6a6b311f60858394fba9bf0306ec712e, type: 3}
-      propertyPath: spawnLimit
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571763866571068178, guid: 6a6b311f60858394fba9bf0306ec712e, type: 3}
       propertyPath: spawnRadius
       value: 220.4
       objectReference: {fileID: 0}

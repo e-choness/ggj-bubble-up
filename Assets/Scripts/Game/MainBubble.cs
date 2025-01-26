@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,6 +55,8 @@ namespace Game
         public static Bubble centralBubble;
 
         public List<Bubble> bubblesPoppedThisFrame = new();
+
+        public Action OnGameEnd;
 
         void Awake()
         {

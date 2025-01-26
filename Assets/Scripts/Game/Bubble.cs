@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 
 #if UNITY_EDITOR
@@ -59,7 +62,7 @@ namespace Game
 
         [HideInInspector] public bool isLocked {get; private set;}
 
-        [HideInInspector] public List<Bubble> neighbors = new List<Bubble>();
+        [HideInInspector] public List<Bubble> neighbors = new();
 
         private bool firstCollision = true;
 
@@ -162,13 +165,13 @@ namespace Game
 
         private void SetVelocity()
         {
-            Vector3 direction = (System.SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
+            Vector3 direction = (SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
             _rigidbody.linearVelocity = direction * GetVelocity();
         }
 
         private bool IsAtCenter()
         {
-            Vector3 target = System.SpawnManager.Instance.transform.position;
+            Vector3 target = SpawnManager.Instance.transform.position;
             return (transform.position - target).magnitude <= GetRadius() * centralLockingFactor;
         }
 
@@ -186,7 +189,7 @@ namespace Game
 
         private void LockPosition()
         {
-            transform.position = System.SpawnManager.Instance.transform.position;
+            transform.position = SpawnManager.Instance.transform.position;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
         }
@@ -198,41 +201,31 @@ namespace Game
 
         private void ProcessCombo()
         {
-            foreach (Bubble neighbor in neighbors)
-            {
-                if (IsSameColor(neighbor))
-                {
-                    onBeforeCombo.Invoke();
-                    System.ScoreManager.Instance.IncrementCombo();
-                    Pop();
-                    onAfterCombo.Invoke();
-                    return;
-                }
-            }
+            if (!neighbors.Any(IsSameColor)) return;
+            
+            onBeforeCombo?.Invoke();
+            ScoreManager.Instance.IncrementCombo();
+            Pop();
+            onAfterCombo.Invoke();
         }
 
         private void HandleEdgeCaseDifferentColor()
         {
             if (!IsOutsideMainBubble()) return;
-            UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
-            if (pauseMenu != null)
-            {
-                pauseMenu.gameOverSign.SetActive(true);
-                pauseMenu.resumeButton.interactable = false;
-                pauseMenu.allowUnpause = false;
-                pauseMenu.TogglePause();
-            }
+            
+            MainBubble.Instance.OnGameEnd?.Invoke();
+
             Debug.Log("GAME OVER");
         }
 
         private bool IsOutsideMainBubble()
         {
-            Vector3 center = System.SpawnManager.Instance.transform.position;
+            Vector3 center = SpawnManager.Instance.transform.position;
             float dist = (transform.position - center).magnitude;
             return dist + GetRadius() >= MainBubble.Instance.GetRadius();
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             onCollision.Invoke();
             Bubble other = collision.collider.GetComponent<Bubble>();
@@ -250,6 +243,7 @@ namespace Game
                     else // TODO: game over
                     {
                         //Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
+                        MainBubble.Instance.OnGameEnd?.Invoke(); // If uncomment the previous line, comment out this one
                         return;
                     }
 

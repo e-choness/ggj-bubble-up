@@ -33,7 +33,7 @@ namespace System
             InitializeScores();
         }
 
-        private void InitializeScores()
+        public void InitializeScores()
         {
             // On the current game start the score should be 0
             _currentScore = 0;

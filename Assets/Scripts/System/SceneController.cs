@@ -25,6 +25,8 @@ namespace System
         {
             Debug.Log("Loading the game...");
             CurrentScene = SceneIndex.GameScene;
+            ScoreManager.Instance.InitializeScores();
+            Time.timeScale = 1; // Make sure the game is running in case you use the pause menu to exit
             SceneManager.LoadScene((int)SceneIndex.GameScene);
         }
 
@@ -32,6 +34,7 @@ namespace System
         {
             Debug.Log("Loading the main menu...");
             CurrentScene = SceneIndex.MainMenu;
+            Time.timeScale = 1; // Make sure the game is running in case you use the pause menu to exit
             SceneManager.LoadScene((int)SceneIndex.MainMenu);
         }
 

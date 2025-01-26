@@ -11,10 +11,14 @@ public class ComboIndicator : MonoBehaviour
     private Quaternion originalRotation;
     private Vector2 originalScale;
 
+    public static ComboIndicator Instance;
+
     void Awake()
     {
         originalScale = transform.localScale;
         originalRotation = transform.rotation;
+        Instance = this; // voodoo garbage
+        gameObject.SetActive(false);
     }
 
     void OnEnable()

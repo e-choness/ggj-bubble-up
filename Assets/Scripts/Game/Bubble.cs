@@ -17,7 +17,8 @@ namespace Game
     public class Bubble : MonoBehaviour
     {
         [Header("Physics")]
-        [SerializeField, Min(0f)] private float velocity = 50f;
+        [SerializeField, Min(0f)] private float initialVelocity = 50f;
+        [SerializeField, Min(0f)] private float finalVelocity = 40f;
 
         /// <summary>
         /// When the bubble gets close to the center of the screen, it should "snap" into place and never move thereafter until it is popped.
@@ -142,10 +143,21 @@ namespace Game
 
         public float GetRadius() => (transform.TransformPoint(new Vector2(collider.radius, 0f)) - transform.position).magnitude;
 
+        private float GetVelocity()
+        {
+            float R = MainBubble.Instance.GetRadius();
+            float distToMainBubble = (transform.position - MainBubble.Instance.transform.position).magnitude;
+            float startRadius = R * MainBubble.Instance.velocityRadiusFactor;
+            float q = distToMainBubble - R;
+            float d = startRadius - R;
+            float progress = Mathf.Clamp(1f - (q - R) / d, 0f, 1f);
+            return Mathf.Lerp(initialVelocity, finalVelocity, progress);
+        }
+
         private void SetVelocity()
         {
             Vector3 direction = (System.SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
-            _rigidbody.linearVelocity = direction * velocity;
+            _rigidbody.linearVelocity = direction * GetVelocity();
         }
 
         private bool IsAtCenter()

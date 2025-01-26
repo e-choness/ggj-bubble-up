@@ -63,6 +63,8 @@ namespace Game
 
         private bool firstCollision = true;
 
+        private Sprite originalSprite;
+
         //potentially use the same value for all the vector values
 
         private void Awake()
@@ -71,6 +73,7 @@ namespace Game
             _rigidbody = GetComponent<Rigidbody2D>();
             _audioSource = GetComponent<AudioSource>();
             _animator = GetComponent<Animator>();
+            originalSprite = _spriteRenderer.sprite;
         }
 
         // Update is called once per frame
@@ -82,6 +85,7 @@ namespace Game
 
         void Reset()
         {
+            _spriteRenderer.sprite = originalSprite;
             _animator.SetBool("isPopped", false);
             _audioSource.Stop();
             if (isLocked) UnlockPosition();
@@ -245,7 +249,7 @@ namespace Game
                     if (sameColor) Pop();
                     else // TODO: game over
                     {
-                        Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
+                        //Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
                         return;
                     }
 

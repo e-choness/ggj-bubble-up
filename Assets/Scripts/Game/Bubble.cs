@@ -26,6 +26,7 @@ namespace Game
         [SerializeField, Range(0f, 1f)] private float centralLockingFactor = 0.5f;
 
         [Header("Visuals")]
+        [SerializeField] private AnimationClip popAnimation;
         [SerializeField] private List<Color> colors = new();
 
         public UnityEvent onCollision = new();
@@ -38,6 +39,14 @@ namespace Game
         // Components
         private SpriteRenderer _spriteRenderer;
         private CircleCollider2D _collider;
+        public new CircleCollider2D collider 
+        {
+            get
+            {
+                if (_collider == null) _collider = GetComponent<CircleCollider2D>();
+                return _collider;
+            }
+        }
         private Rigidbody2D _rigidbody;
         private AudioSource _audioSource;
         private Animator _animator;
@@ -46,12 +55,13 @@ namespace Game
 
         [HideInInspector] public List<Bubble> neighbors = new List<Bubble>();
 
+        private bool firstCollision = true;
+
         //potentially use the same value for all the vector values
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<CircleCollider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _audioSource = GetComponent<AudioSource>();
             _animator = GetComponent<Animator>();
@@ -68,6 +78,8 @@ namespace Game
         public void Pop()
         {
             _animator.SetBool("isPopped", true);
+            Invoke(nameof(DestroyBubble), popAnimation.length);
+
             foreach (Bubble neighbor in neighbors.ToArray())
             {
                 if (IsSameColor(neighbor))
@@ -78,6 +90,11 @@ namespace Game
             }
 
             onPop.Invoke();
+        }
+
+        private void DestroyBubble()
+        {
+            Destroy(gameObject);
         }
 
         public void Connect(Bubble other)
@@ -105,7 +122,7 @@ namespace Game
 
         #region Physics
 
-        public float GetRadius() => (transform.TransformPoint(new Vector2(_collider.radius, 0f)) - transform.position).magnitude;
+        public float GetRadius() => (transform.TransformPoint(new Vector2(collider.radius, 0f)) - transform.position).magnitude;
 
         private void SetVelocity()
         {
@@ -130,12 +147,11 @@ namespace Game
             Bubble other = collision.collider.GetComponent<Bubble>();
             if (other != null)
             {
-                velocity = 0f; // "sticky" behavior, no jiggling
+                //velocity = 0f; // "sticky" behavior, no jiggling
                 bool sameColor = IsSameColor(other);
 
                 Connect(other);
-
-                _audioSource.Play();
+                if (firstCollision) _audioSource.Play();
                 
                 Vector3 center = System.SpawnManager.Instance.transform.position;
                 float dist = (transform.position - center).magnitude;
@@ -157,6 +173,7 @@ namespace Game
                 
                 if (sameColor) onCollisionWithSameColor.Invoke();
                 else onCollisionWithDifferentColor.Invoke();
+                firstCollision = false;
             }
         }
 

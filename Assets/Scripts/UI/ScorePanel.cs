@@ -8,6 +8,11 @@ namespace UI
     {
         [SerializeField] private TMP_Text currentScoreText;
         [SerializeField] private TMP_Text highestScoreText;
+        
+        /// <summary>
+        /// Needs to be disabled during main menu
+        /// </summary>
+        [SerializeField] private GameObject currentScoreBackground;
 
         private void Start()
         {
@@ -15,8 +20,8 @@ namespace UI
             ScoreManager.Instance.OnCurrentScoreChanged += DisplayCurrentScore;
             ScoreManager.Instance.OnHighestScoreChanged += DisplayHighestScore;
 
-            if (SceneController.CurrentScene == SceneIndex.MainMenu)
-                currentScoreText.text = "";
+            Debug.Log($"Current scene: {SceneController.CurrentScene}");
+            currentScoreBackground.SetActive(SceneController.CurrentScene != SceneIndex.MainMenu);
         }
 
         private void OnDisable()
@@ -27,9 +32,7 @@ namespace UI
 
         private void DisplayCurrentScore(int currentSore)
         {
-            Debug.Log($"Current scene: {SceneController.CurrentScene}");
-            currentScoreText.text = SceneController.CurrentScene == SceneIndex.MainMenu ? 
-                "" : $"Current Score: {currentSore}";
+            currentScoreText.text = $"Current score: {currentSore}";
         }
 
         private void DisplayHighestScore(int highestScore)

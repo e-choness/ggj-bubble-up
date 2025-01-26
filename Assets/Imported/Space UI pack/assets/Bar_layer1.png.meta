@@ -142,13 +142,13 @@ TextureImporter:
       name: Bar_layer1_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 10
-        width: 318
-        height: 83
+        x: 34
+        y: 38
+        width: 284
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 20, z: 25, w: 20}
       customData: 
       outline: []
       physicsShape: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: dc9180475c0f683489af5d76b7f6d585
     internalID: 0
     vertices: []
     indices: 
@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bar_layer1_0: -5069656673942863600
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -166,15 +166,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coyoteTime: 0.5
-  initialVelocity: 50
-  finalVelocity: 20
+  initialVelocity: 60
+  finalVelocity: 30
   centralLockingFactor: 1
   popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
   colors:
-  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.4239883, b: 0, a: 1}
   - {r: 0, g: 1, b: 0.028794289, a: 1}
   - {r: 0.9469855, g: 1, b: 0, a: 1}
-  - {r: 0.6704478, g: 0, b: 1, a: 1}
+  - {r: 0.84482527, g: 0, b: 1, a: 1}
   glowEffect: {fileID: 6930264702222973908}
   onCollision:
     m_PersistentCalls:

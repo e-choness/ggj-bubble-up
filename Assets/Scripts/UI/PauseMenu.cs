@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,7 +20,10 @@ namespace UI
         [Header("Sub Panels")] 
         [SerializeField] private GameObject buttonContainer;
         [SerializeField] private GameObject guidePanel;
-        public GameObject gameOverSign;
+        [SerializeField] private  GameObject gameOverBanner;
+        
+        [Header("Game Over Menu")]
+        [SerializeField] private int delayTime = 3;
 
         /// <summary>
         /// Set to false when the game is over
@@ -28,6 +33,16 @@ namespace UI
         private void Start()
         {
             AssignListeners();
+        }
+
+        private void OnEnable()
+        {
+            MainBubble.Instance.OnGameEnd += DisplayGameOver;
+        }
+
+        private void OnDisable()
+        {
+            MainBubble.Instance.OnGameEnd -= DisplayGameOver;
         }
 
         private void AssignListeners()
@@ -68,6 +83,22 @@ namespace UI
         {
             if (!context.performed) return;
             TogglePause();
+        }
+
+        private void DisplayGameOver()
+        {
+            // Delay the pop menu for [delayTime](default = 3 seconds), it can be configured on Pause Menu script
+            StartCoroutine(DelayMenu());
+            
+            gameOverBanner.SetActive(true);
+            resumeButton.interactable = false;
+            allowUnpause = false;
+            TogglePause();
+        }
+
+        private IEnumerator DelayMenu()
+        {
+            yield return new WaitForSeconds(delayTime);
         }
     }
 }

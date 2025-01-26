@@ -1074,6 +1074,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 279723556}
     m_Modifications:
+    - target: {fileID: 929519566197386053, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 929519566197386053, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6781646986192324099, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 929519566197386053, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1997942013356487139, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
       propertyPath: m_Name
       value: ScorePanel
@@ -1156,6 +1168,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7011638732246789923, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715171485701205148, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 8715171485701205148, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6781646986192324099, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 8715171485701205148, guid: a06d05853e0476d44946965cd98c24f7, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

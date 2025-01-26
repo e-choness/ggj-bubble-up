@@ -180,6 +180,7 @@ MonoBehaviour:
   rotationSpeed: 100
   bubbleContainer: {fileID: 9091300268017787664}
   velocityRadiusFactor: 2
+  bubblePrefab: {fileID: 5600533939137190105, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
   chainPopAudio: {fileID: 1579675156871290335}
   bubblesPoppedThisFrame: []
 --- !u!212 &3402908873422060739

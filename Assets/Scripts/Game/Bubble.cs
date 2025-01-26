@@ -34,7 +34,7 @@ namespace Game
 
         [Header("Visuals")]
         [SerializeField] private AnimationClip popAnimation;
-        [SerializeField] private List<Color> colors = new();
+        public List<Color> colors = new();
 
         public UnityEvent onCollision = new();
         public UnityEvent onCollisionWithSameColor = new();
@@ -64,7 +64,7 @@ namespace Game
 
         [HideInInspector] public List<Bubble> neighbors = new();
 
-        private bool firstCollision = true;
+        [HideInInspector] public bool firstCollision = true;
 
         private Sprite originalSprite;
 
@@ -141,10 +141,9 @@ namespace Game
 
         public bool IsSameColor(Bubble other) => _spriteRenderer.color == other._spriteRenderer.color;
 
-        public void SetRandomColor()
-        {
-            _spriteRenderer.color = colors[Random.Range(0, colors.Count - 1)];
-        }
+        public void SetRandomColor() => SetColor(colors[Random.Range(0, colors.Count - 1)]);
+
+        public void SetColor(Color color) => _spriteRenderer.color = color;
 
         #endregion
 
@@ -242,8 +241,7 @@ namespace Game
                     if (sameColor) Pop();
                     else // TODO: game over
                     {
-                        //Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
-                        MainBubble.Instance.OnGameEnd?.Invoke(); // If uncomment the previous line, comment out this one
+                        Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
                         return;
                     }
 

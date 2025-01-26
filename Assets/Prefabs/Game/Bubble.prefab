@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coyoteTime: 3.48
+  coyoteTime: 0.5
   initialVelocity: 50
   finalVelocity: 20
   centralLockingFactor: 1

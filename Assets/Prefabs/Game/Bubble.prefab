@@ -130,6 +130,12 @@ MonoBehaviour:
   onPop:
     m_PersistentCalls:
       m_Calls: []
+  onBeforeCombo:
+    m_PersistentCalls:
+      m_Calls: []
+  onAfterCombo:
+    m_PersistentCalls:
+      m_Calls: []
   neighbors: []
 --- !u!58 &3385970943473734895
 CircleCollider2D:

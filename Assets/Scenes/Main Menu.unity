@@ -1058,6 +1058,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 2632093828249376657, guid: 2091c49f838df094a9d5947fc0030d1e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 2632093828249376657, guid: 2091c49f838df094a9d5947fc0030d1e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6781646986192324099, guid: 5f8784232fad3bb4da9222ec27f783d2, type: 2}
+    - target: {fileID: 2632093828249376657, guid: 2091c49f838df094a9d5947fc0030d1e, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

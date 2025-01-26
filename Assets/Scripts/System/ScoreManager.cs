@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
@@ -28,9 +26,9 @@ namespace System
         private const string CurrentScoreKey = "CurrentScore";
         private const string HighestScoreKey = "HighestScore";
 
-        public int nCombos {get; private set;} = 0;
+        public int NumCombos {get; private set;}
 
-        private float comboTimer = 0f;
+        private float _comboTimer;
 
         public override void Awake()
         {
@@ -38,14 +36,26 @@ namespace System
             InitializeScores();
         }
 
-        void Update()
+        private void Start()
         {
-            if (nCombos > 0)
+            if (MainBubble.Instance != null) 
+                MainBubble.Instance.OnGameEnd += EndGameScores;
+        }
+
+        private void OnDisable()
+        {
+            if(MainBubble.Instance != null)
+                MainBubble.Instance.OnGameEnd -= EndGameScores;
+        }
+
+        private void Update()
+        {
+            if (NumCombos > 0)
             {
-                comboTimer = Mathf.Min(comboTimer + Time.deltaTime, comboTime);
-                if (comboTimer == comboTime)
+                _comboTimer = Mathf.Min(_comboTimer + Time.deltaTime, comboTime);
+                if (Mathf.Approximately(_comboTimer, comboTime))
                 {
-                    comboTimer = 0f;
+                    _comboTimer = 0f;
                     ResetCombo();
                     ComboIndicator.Instance.gameObject.SetActive(false);
                 }
@@ -98,18 +108,18 @@ namespace System
 
         public void ProcessBubblePop(Bubble bubble)
         {
-            if (nCombos == 0) CalculateScore(scorePerPop);
-            else CalculateScore(nCombos * comboMultiplier * scorePerPop);
+            if (NumCombos == 0) CalculateScore(scorePerPop);
+            else CalculateScore(NumCombos * comboMultiplier * scorePerPop);
         }
 
         public void IncrementCombo()
         {
-            nCombos ++;
-            comboTimer = 0f;
+            NumCombos ++;
+            _comboTimer = 0f;
             ComboIndicator.Instance.gameObject.SetActive(false);
             ComboIndicator.Instance.gameObject.SetActive(true);
         } 
 
-        public void ResetCombo() => nCombos = 0;
+        public void ResetCombo() => NumCombos = 0;
     }
 }

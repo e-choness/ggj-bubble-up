@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 93521f573705d0e4c8864044d265d6b9
+guid: 9458148c5aabf7b4e8c750ad26cb9c89
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8025736477978870337
-    second: css-pattern-by-magicpattern_0
+      213: 2267047184567670442
+    second: stripe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,7 +53,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: css-pattern-by-magicpattern_0
+      name: stripe_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1200
-        height: 900
+        width: 67
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 14243d6fdc4216f60800000000000000
-      internalID: 8025736477978870337
+      spriteID: aa6943d276b267f10800000000000000
+      internalID: 2267047184567670442
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      css-pattern-by-magicpattern_0: 8025736477978870337
+      stripe_0: 2267047184567670442
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

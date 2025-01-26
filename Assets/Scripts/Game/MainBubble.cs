@@ -21,6 +21,9 @@ namespace Game
 
         [SerializeField] private GameObject bubbleContainer;
 
+        [Header("Audio")]
+        [SerializeField] private AudioSource chainPopAudio;
+
         private Rotation rotation;
 
         [System.Flags, System.Serializable]
@@ -48,6 +51,8 @@ namespace Game
 
         public static Bubble centralBubble;
 
+        public List<Bubble> bubblesPoppedThisFrame = new();
+
         void Awake()
         {
             if (Instance != null) Destroy(gameObject);
@@ -66,12 +71,23 @@ namespace Game
             else if (Input.GetKeyUp(KeyCode.RightArrow)) StopRotateRight();
         }
 
+        void LateUpdate()
+        {
+            ProcessChainPop();
+            bubblesPoppedThisFrame.Clear();
+        }
+
         void FixedUpdate()
         {
             float speed = 0f;
             if (rotation.HasFlag(Rotation.Left)) speed += rotationSpeed;
             if (rotation.HasFlag(Rotation.Right)) speed -= rotationSpeed;
             bubbleContainer.transform.Rotate(transform.forward, speed * Time.fixedDeltaTime); 
+        }
+
+        private void ProcessChainPop()
+        {
+            if (bubblesPoppedThisFrame.Count > 2) chainPopAudio.Play();
         }
 
         public float GetRadius() => (transform.TransformPoint(new Vector2(collider.radius, 0f)) - transform.position).magnitude;

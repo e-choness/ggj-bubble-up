@@ -90,6 +90,8 @@ namespace Game
         {
             _animator.SetBool("isPopped", true);
             Invoke(nameof(DestroyBubble), popAnimation.length);
+            
+            MainBubble.Instance.bubblesPoppedThisFrame.Add(this);
 
             foreach (Bubble neighbor in neighbors.ToArray())
             {

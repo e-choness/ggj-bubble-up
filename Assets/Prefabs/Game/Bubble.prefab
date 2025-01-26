@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6442398339881983626}
-  - component: {fileID: 2537992948029234125}
   - component: {fileID: 5423090334679791361}
+  - component: {fileID: 2537992948029234125}
   - component: {fileID: 3385970943473734895}
   - component: {fileID: 3895469788322439511}
   - component: {fileID: 8142524272271695943}
@@ -37,6 +37,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5423090334679791361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600533939137190105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coyoteTime: 0.5
+  initialVelocity: 50
+  finalVelocity: 20
+  centralLockingFactor: 1
+  popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
+  colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.028794289, a: 1}
+  - {r: 0.9469855, g: 1, b: 0, a: 1}
+  - {r: 0.6704478, g: 0, b: 1, a: 1}
+  onCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionWithSameColor:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionWithDifferentColor:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionOutsideMainBubble:
+    m_PersistentCalls:
+      m_Calls: []
+  onReachedCenter:
+    m_PersistentCalls:
+      m_Calls: []
+  onPop:
+    m_PersistentCalls:
+      m_Calls: []
+  onBeforeCombo:
+    m_PersistentCalls:
+      m_Calls: []
+  onAfterCombo:
+    m_PersistentCalls:
+      m_Calls: []
+  neighbors: []
+  firstCollision: 1
 --- !u!212 &2537992948029234125
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,53 +140,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5423090334679791361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600533939137190105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c174c6e0468ebbefaace00c6ea2629b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coyoteTime: 0.5
-  initialVelocity: 50
-  finalVelocity: 20
-  centralLockingFactor: 1
-  popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
-  colors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.028794289, a: 1}
-  - {r: 0.9469855, g: 1, b: 0, a: 1}
-  - {r: 0.6704478, g: 0, b: 1, a: 1}
-  onCollision:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionWithSameColor:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionWithDifferentColor:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionOutsideMainBubble:
-    m_PersistentCalls:
-      m_Calls: []
-  onReachedCenter:
-    m_PersistentCalls:
-      m_Calls: []
-  onPop:
-    m_PersistentCalls:
-      m_Calls: []
-  onBeforeCombo:
-    m_PersistentCalls:
-      m_Calls: []
-  onAfterCombo:
-    m_PersistentCalls:
-      m_Calls: []
-  neighbors: []
 --- !u!58 &3385970943473734895
 CircleCollider2D:
   m_ObjectHideFlags: 0

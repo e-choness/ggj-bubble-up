@@ -139,11 +139,16 @@ namespace Game
 
         #region Color
 
-        public bool IsSameColor(Bubble other) => _spriteRenderer.color == other._spriteRenderer.color;
+        public bool IsSameColor(Bubble other) => GetColor() == other.GetColor();
 
         public void SetRandomColor() => SetColor(colors[Random.Range(0, colors.Count - 1)]);
 
-        public void SetColor(Color color) => _spriteRenderer.color = color;
+        public void SetColor(Color color) 
+        {
+            _spriteRenderer.color = color;
+        }
+
+        public Color GetColor() => _spriteRenderer.color;
 
         #endregion
 
@@ -224,38 +229,40 @@ namespace Game
             return dist + GetRadius() >= MainBubble.Instance.GetRadius();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        public virtual void OnCollidedWithBubble(Bubble other)
+        {
+            bool sameColor = IsSameColor(other);
+
+            Connect(other);
+            if (firstCollision) _audioSource.Play();
+            
+            if (IsOutsideMainBubble())
+            {
+                // Pop will trigger a chain reaction on all the neighbors as needed
+                if (sameColor) Pop();
+                else // TODO: game over
+                {
+                    Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
+                    return;
+                }
+
+                onCollisionOutsideMainBubble.Invoke();
+            }
+            else
+            {
+                if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
+            }
+            
+            if (sameColor) onCollisionWithSameColor.Invoke();
+            else onCollisionWithDifferentColor.Invoke();
+            firstCollision = false;
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
         {
             onCollision.Invoke();
             Bubble other = collision.collider.GetComponent<Bubble>();
-            if (other != null)
-            {
-                bool sameColor = IsSameColor(other);
-
-                Connect(other);
-                if (firstCollision) _audioSource.Play();
-                
-                if (IsOutsideMainBubble())
-                {
-                    // Pop will trigger a chain reaction on all the neighbors as needed
-                    if (sameColor) Pop();
-                    else // TODO: game over
-                    {
-                        Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
-                        return;
-                    }
-
-                    onCollisionOutsideMainBubble.Invoke();
-                }
-                else
-                {
-                    if (!MainBubble.bubbles.Contains(this)) MainBubble.AddBubble(this);
-                }
-                
-                if (sameColor) onCollisionWithSameColor.Invoke();
-                else onCollisionWithDifferentColor.Invoke();
-                firstCollision = false;
-            }
+            if (other != null) OnCollidedWithBubble(other);
         }
 
         void OnCollisionExit2D(Collision2D collision)

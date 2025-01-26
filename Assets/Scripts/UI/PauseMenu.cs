@@ -39,7 +39,11 @@ namespace UI
 
         void OnEnable()
         {
-            if (reenable) resumeButton.interactable = true;
+            if (reenable) 
+            {
+                resumeButton.interactable = true;
+                reenable = false;
+            }
         }
 
         private void AssignListeners()

@@ -212,7 +212,16 @@ namespace Game
                     if (sameColor) Pop();
                     else // TODO: game over
                     {
-                        throw new System.Exception("Game Over");
+                        UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
+                        if (pauseMenu != null)
+                        {
+                            pauseMenu.gameOverSign.SetActive(true);
+                            pauseMenu.resumeButton.interactable = false;
+                            pauseMenu.allowUnpause = false;
+                            pauseMenu.TogglePause();
+                        }
+                        Debug.Log("GAME OVER");
+                        return;
                     }
 
                     onCollisionOutsideMainBubble.Invoke();

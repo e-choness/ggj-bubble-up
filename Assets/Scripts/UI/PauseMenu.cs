@@ -8,7 +8,7 @@ namespace UI
     public class PauseMenu : MonoBehaviour
     {
         [Header("Buttons")] 
-        [SerializeField] private Button resumeButton;
+        public Button resumeButton;
         [SerializeField] private Button reStartButton;
         [SerializeField] private Button guideButton;
         [SerializeField] private Button mainMenuButton;
@@ -18,6 +18,12 @@ namespace UI
         [Header("Sub Panels")] 
         [SerializeField] private GameObject buttonContainer;
         [SerializeField] private GameObject guidePanel;
+        public GameObject gameOverSign;
+
+        /// <summary>
+        /// Set to false when the game is over
+        /// </summary>
+        [HideInInspector] public bool allowUnpause = true;
 
         private void Start()
         {
@@ -50,7 +56,7 @@ namespace UI
                 gameObject.SetActive(true);
                 Debug.Log("Game is now paused.");
             }
-            else 
+            else if (allowUnpause) 
             {
                 Time.timeScale = 1;
                 gameObject.SetActive(false);

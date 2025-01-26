@@ -21,7 +21,6 @@ namespace UI
 
         private void Start()
         {
-            startText.text = "Start Popping!";
             startText.transform.localScale = startScale;
             StartCoroutine(BounceAnimation());
         }

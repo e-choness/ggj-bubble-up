@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 5600533939137190105, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
-  secondsBetweenSpawns: 1
+  secondsBetweenSpawns: 1.5
   initialNumberOfSpawns: 1
   spawnLimit: 200
   spawnRadius: 0

@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coyoteTime: 0.5
-  initialVelocity: 50
-  finalVelocity: 20
+  initialVelocity: 60
+  finalVelocity: 30
   centralLockingFactor: 1
   popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
   colors:

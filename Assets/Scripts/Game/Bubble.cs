@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -72,9 +73,17 @@ namespace Game
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (isLocked) return;
-            SetVelocity();
+            if (!isLocked) SetVelocity();
             if (IsAtCenter()) OnReachCenter();
+        }
+
+        void Reset()
+        {
+            _animator.SetBool("isPopped", false);
+            _audioSource.Stop();
+            if (isLocked) UnlockPosition();
+            neighbors.Clear();
+            firstCollision = true;
         }
     
         public void Pop()
@@ -93,12 +102,15 @@ namespace Game
 
             if (MainBubble.centralBubble == this) MainBubble.centralBubble = null;
 
+            System.ScoreManager.Instance.ProcessBubblePop(this);
+
             onPop.Invoke();
         }
 
         private void DestroyBubble()
         {
-            Destroy(gameObject);
+            Reset();
+            System.SpawnManager.Instance.ReturnToPool(this);
         }
 
         public void Connect(Bubble other)
@@ -158,6 +170,11 @@ namespace Game
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
         }
+        private void UnlockPosition()
+        {
+            _rigidbody.constraints = RigidbodyConstraints2D.None;
+            isLocked = false;
+        }
 
         private void ProcessCombo()
         {
@@ -166,11 +183,13 @@ namespace Game
                 if (IsSameColor(neighbor))
                 {
                     onBeforeCombo.Invoke();
+                    System.ScoreManager.Instance.IncrementCombo();
                     Pop();
                     onAfterCombo.Invoke();
                     return;
                 }
             }
+            System.ScoreManager.Instance.ResetCombo();
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -179,7 +198,6 @@ namespace Game
             Bubble other = collision.collider.GetComponent<Bubble>();
             if (other != null)
             {
-                //velocity = 0f; // "sticky" behavior, no jiggling
                 bool sameColor = IsSameColor(other);
 
                 Connect(other);

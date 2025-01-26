@@ -1,10 +1,18 @@
 using System.Collections;
+using Game;
 using UnityEngine;
 
 namespace System
 {
     public class ScoreManager : SingletonPersistent<ScoreManager>
     {
+        public int scorePerPop = 1;
+        /// <summary>
+        /// After the first combo, all pops are multiplied by this value. On subsequent combos before the combo timer runs out, this 
+        /// multiplier increases by += comboMultiplier
+        /// </summary>
+        public int comboMultiplier = 2;
+
         /// <summary>
         /// An event to broadcast score changes
         /// </summary>
@@ -16,6 +24,8 @@ namespace System
         
         private const string CurrentScoreKey = "CurrentScore";
         private const string HighestScoreKey = "HighestScore";
+
+        private int nCombos = 0;
 
         public override void Awake()
         {
@@ -66,23 +76,15 @@ namespace System
             return PlayerPrefs.GetInt(scoreKey, 0);
         }
 
-        #region Test - delete later
 
-        private void Start()
+        public void ProcessBubblePop(Bubble bubble)
         {
-            // StartCoroutine(IncrementScore());
+            if (nCombos == 0) CalculateScore(scorePerPop);
+            else CalculateScore(nCombos * comboMultiplier * scorePerPop);
         }
 
-        private IEnumerator IncrementScore()
-        {
-            for (var i = 0; i < 100; i++)
-            {
-                CalculateScore(1);
-                Debug.Log($"Current score: {_currentScore}");
-                yield return new WaitForSeconds(1);
-            }
-        }
+        public void IncrementCombo() => nCombos += 1;
 
-        #endregion
+        public void ResetCombo() => nCombos = 0;
     }
 }

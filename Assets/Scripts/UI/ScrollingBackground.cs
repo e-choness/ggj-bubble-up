@@ -18,8 +18,9 @@ public class ScrollingBackground : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Vector2 offset = _rawImage.uvRect.position + new Vector2(scrollSpeed * Time.deltaTime/4, scrollSpeed * Time.deltaTime/4);
+    {   
+        // private float scrollz = scrollSpeed * Time.deltaTime/16;
+        Vector2 offset = _rawImage.uvRect.position + new Vector2(scrollSpeed * Time.deltaTime/12, scrollSpeed * Time.deltaTime/16);
 
         // offset.x %= 1;
         // offset.y %= 1;

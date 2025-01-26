@@ -33,6 +33,8 @@ namespace System
         /// The range where the bubble spawns on the screen
         /// </summary>
         [SerializeField, Min(0f)] private float spawnRadius;
+
+        [SerializeField] private List<SpecialBubble> specialBubbles = new();
     
 
         private List<float> previousSpawnAngles = new();
@@ -41,6 +43,13 @@ namespace System
         /// A pool for pre-instantiated bubbles
         /// </summary>
         private Queue<GameObject> _bubblePool;
+
+        [System.Serializable]
+        public class SpecialBubble
+        {
+            public GameObject prefab;
+            [Range(0f, 1f)] public float spawnChance = 0f;
+        }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         public override void Awake()
@@ -76,7 +85,7 @@ namespace System
             _bubblePool = new Queue<GameObject>();
             for (var i = 0; i < spawnLimit; i++)
             {
-                var bubble = Instantiate(bubblePrefab, transform);
+                var bubble = Instantiate(GetRandomBubble(), transform);
                 bubble.GetComponent<Bubble>().SetRandomColor();
                 bubble.SetActive(false);
                 _bubblePool.Enqueue(bubble);
@@ -125,6 +134,16 @@ namespace System
             var randomX = spawnRadius * Mathf.Cos(theta);
             var randomY = spawnRadius * Mathf.Sin(theta);
             return new Vector2(randomX, randomY);
+        }
+
+        private GameObject GetRandomBubble()
+        {
+            float a = UnityEngine.Random.Range(0f, 1f);
+            foreach (SpecialBubble special in specialBubbles.Shuffle())
+            {
+                if (a < special.spawnChance) return special.prefab;
+            }
+            return bubblePrefab;
         }
 
         public void ReturnToPool(Bubble bubble)

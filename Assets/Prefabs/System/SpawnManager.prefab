@@ -49,3 +49,6 @@ MonoBehaviour:
   initialNumberOfSpawns: 1
   spawnLimit: 200
   spawnRadius: 0
+  specialBubbles:
+  - prefab: {fileID: 988390389293759182, guid: 717ee853ef64ae89184ecaa2ef2a50cd, type: 3}
+    spawnChance: 0.08

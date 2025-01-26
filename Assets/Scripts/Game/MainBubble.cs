@@ -144,20 +144,6 @@ namespace Game
             GameObject central = null;
             central = Instantiate(bubblePrefab, transform.position, Quaternion.identity, null);
 
-            List<Color> Shuffle(List<Color> list)
-            {
-                System.Random rng = new System.Random();
-                int n = list.Count;  
-                while (n > 1) {  
-                    n--;  
-                    int k = rng.Next(n + 1);  
-                    Color value = list[k];  
-                    list[k] = list[n];  
-                    list[n] = value;  
-                }
-                return list;
-            }
-
             Bubble bubble = central.GetComponent<Bubble>();
             List<Color> colors = new List<Color>(bubble.colors);
 
@@ -167,7 +153,7 @@ namespace Game
             {
                 if (colorQueue.Count == 0) // refill the queue
                 {
-                    foreach (Color c in Shuffle(colors)) colorQueue.Enqueue(c);
+                    foreach (Color c in colors.Shuffle()) colorQueue.Enqueue(c);
                 }
                 bubble.SetColor(colorQueue.Dequeue());
             }
@@ -184,7 +170,6 @@ namespace Game
             {
                 position.x = 2.1f * radius * Mathf.Cos(theta);
                 position.y = 2.1f * radius * Mathf.Sin(theta);
-                Debug.Log(transform.position + position);
                 go = Instantiate(bubblePrefab, transform.position + position, Quaternion.identity, null);
                 Bubble b = go.GetComponent<Bubble>();
                 SetColor(b);

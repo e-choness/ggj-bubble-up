@@ -191,7 +191,6 @@ namespace Game
                     return;
                 }
             }
-            System.ScoreManager.Instance.ResetCombo();
         }
 
         void OnCollisionEnter2D(Collision2D collision)

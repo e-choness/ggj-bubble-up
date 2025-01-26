@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2360094685891258224, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
+      propertyPath: bubble
+      value: 
+      objectReference: {fileID: 4052459923674828998}
     - target: {fileID: 5423090334679791361, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
       propertyPath: colors.Array.size
       value: 1
@@ -101,6 +105,7 @@ MonoBehaviour:
   popAnimation: {fileID: 7400000, guid: 41a2dfd7f7463f94cbf93edd0ddb2fa2, type: 2}
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
+  glowEffect: {fileID: 2315799241905445315}
   onCollision:
     m_PersistentCalls:
       m_Calls: []
@@ -127,3 +132,8 @@ MonoBehaviour:
       m_Calls: []
   neighbors: []
   firstCollision: 1
+--- !u!212 &2315799241905445315 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6930264702222973908, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
+  m_PrefabInstance: {fileID: 4615732373144281623}
+  m_PrefabAsset: {fileID: 0}

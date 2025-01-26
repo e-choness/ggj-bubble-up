@@ -26,7 +26,7 @@ public class ComboIndicator : MonoBehaviour
         Vector3 current = transform.rotation.eulerAngles;
         current.z += Random.Range(-rotationOffset, rotationOffset);
         transform.rotation = Quaternion.Euler(current);
-        comboNumber.SetText("x" + System.ScoreManager.Instance.nCombos);
+        comboNumber.SetText("x" + System.ScoreManager.Instance.NumCombos);
         StartCoroutine(DoZoom());
     }
 

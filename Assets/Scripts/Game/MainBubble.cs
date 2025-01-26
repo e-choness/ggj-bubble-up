@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UI;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -73,6 +75,10 @@ namespace Game
         void Start()
         {
             CreateStartingBubbles();
+
+            PauseMenu pauseMenu = FindAnyObjectByType<PauseMenu>(FindObjectsInactive.Include);
+            if (pauseMenu == null) throw new System.Exception("Can't find pause menu");
+            OnGameEnd += pauseMenu.DisplayGameOver;
         }
 
         void Update()

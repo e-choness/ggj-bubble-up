@@ -89,9 +89,9 @@ namespace UI
 
             gameOverBanner.SetActive(true);
             resumeButton.interactable = false;
-            reenable = true;
             allowUnpause = false;
             TogglePause();
+            reenable = true;
         }
 
         private IEnumerator DelayMenu()

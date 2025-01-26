@@ -179,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   bubbleContainer: {fileID: 9091300268017787664}
+  velocityRadiusFactor: 2
   chainPopAudio: {fileID: 1579675156871290335}
   bubblesPoppedThisFrame: []
 --- !u!212 &3402908873422060739
@@ -226,7 +227,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 50896866030303577, guid: 7f4ba20649e40104985f25c9735b76af, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

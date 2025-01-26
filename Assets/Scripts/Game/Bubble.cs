@@ -16,6 +16,8 @@ namespace Game
     [RequireComponent(typeof(Animator))]
     public class Bubble : MonoBehaviour
     {
+        [SerializeField] private float coyoteTime = 0.1f;
+
         [Header("Physics")]
         [SerializeField, Min(0f)] private float initialVelocity = 50f;
         [SerializeField, Min(0f)] private float finalVelocity = 40f;
@@ -205,6 +207,27 @@ namespace Game
             }
         }
 
+        private void HandleEdgeCaseDifferentColor()
+        {
+            if (!IsOutsideMainBubble()) return;
+            UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
+            if (pauseMenu != null)
+            {
+                pauseMenu.gameOverSign.SetActive(true);
+                pauseMenu.resumeButton.interactable = false;
+                pauseMenu.allowUnpause = false;
+                pauseMenu.TogglePause();
+            }
+            Debug.Log("GAME OVER");
+        }
+
+        private bool IsOutsideMainBubble()
+        {
+            Vector3 center = System.SpawnManager.Instance.transform.position;
+            float dist = (transform.position - center).magnitude;
+            return dist + GetRadius() >= MainBubble.Instance.GetRadius();
+        }
+
         void OnCollisionEnter2D(Collision2D collision)
         {
             onCollision.Invoke();
@@ -216,23 +239,13 @@ namespace Game
                 Connect(other);
                 if (firstCollision) _audioSource.Play();
                 
-                Vector3 center = System.SpawnManager.Instance.transform.position;
-                float dist = (transform.position - center).magnitude;
-                if (dist + GetRadius() >= MainBubble.Instance.GetRadius())
+                if (IsOutsideMainBubble())
                 {
                     // Pop will trigger a chain reaction on all the neighbors as needed
                     if (sameColor) Pop();
                     else // TODO: game over
                     {
-                        UI.PauseMenu pauseMenu = FindFirstObjectByType<UI.PauseMenu>(FindObjectsInactive.Include);
-                        if (pauseMenu != null)
-                        {
-                            pauseMenu.gameOverSign.SetActive(true);
-                            pauseMenu.resumeButton.interactable = false;
-                            pauseMenu.allowUnpause = false;
-                            pauseMenu.TogglePause();
-                        }
-                        Debug.Log("GAME OVER");
+                        Invoke(nameof(HandleEdgeCaseDifferentColor), coyoteTime);
                         return;
                     }
 

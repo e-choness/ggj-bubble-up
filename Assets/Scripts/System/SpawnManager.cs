@@ -83,7 +83,7 @@ namespace System
                 bubble.SetActive(false);
                 _bubblePool.Enqueue(bubble);
             }
-            Debug.Log($"Spawning {initialNumberOfSpawns} bubbles");
+            //Debug.Log($"Spawning {initialNumberOfSpawns} bubbles");
         }
 
         private void SpawnInitialBubbles()
@@ -92,7 +92,7 @@ namespace System
             {
                 var spawnPosition = GetRandomSpawnPosition();
                 SpawnBubble(spawnPosition);
-                Debug.Log($"Spawned a bubble at x: {spawnPosition.x}, y: {spawnPosition.y}");
+                //Debug.Log($"Spawned a bubble at x: {spawnPosition.x}, y: {spawnPosition.y}");
             }
         }
 
@@ -104,7 +104,7 @@ namespace System
             
                 Vector3 spawnPosition = GetRandomSpawnPosition();
                 SpawnBubble(spawnPosition);
-                Debug.Log($"Spawned a bubble at x: {spawnPosition.x}, y: {spawnPosition.y}");
+                //Debug.Log($"Spawned a bubble at x: {spawnPosition.x}, y: {spawnPosition.y}");
             }
         }
 

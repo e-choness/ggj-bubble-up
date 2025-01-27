@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -37,19 +35,30 @@ namespace Game
         public List<Color> colors = new();
         [SerializeField] private SpriteRenderer glowEffect;
 
+        #region Unity Events
         public UnityEvent onCollision = new();
         public UnityEvent onCollisionWithSameColor = new();
         public UnityEvent onCollisionWithDifferentColor = new();
         public UnityEvent onCollisionOutsideMainBubble = new();
+        public UnityEvent onFirstCollision = new();
         public UnityEvent onReachedCenter = new();
         public UnityEvent onPop = new();
         public UnityEvent onBeforeCombo = new();
         public UnityEvent onAfterCombo = new();
-        
-        // Components
+        #endregion
+
+        #region References
         private SpriteRenderer _spriteRenderer;
+        [HideInInspector] public SpriteRenderer spriteRenderer
+        {
+            get
+            {
+                if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
+                return _spriteRenderer;
+            }
+        }
         private CircleCollider2D _collider;
-        public new CircleCollider2D collider 
+        [HideInInspector] public new CircleCollider2D collider 
         {
             get
             {
@@ -58,8 +67,24 @@ namespace Game
             }
         }
         private Rigidbody2D _rigidbody;
-        private AudioSource _audioSource;
+        [HideInInspector] public Rigidbody2D rigidbody
+        {
+            get
+            {
+                if (_rigidbody == null) _rigidbody = GetComponent<Rigidbody2D>();
+                return _rigidbody;
+            }
+        }
         private Animator _animator;
+        [HideInInspector] public Animator animator
+        {
+            get
+            {
+                if (_animator == null) _animator = GetComponent<Animator>();
+                return _animator;
+            }
+        }
+        #endregion
 
         [HideInInspector] public bool isLocked {get; private set;}
 
@@ -71,13 +96,9 @@ namespace Game
 
         //potentially use the same value for all the vector values
 
-        private void Awake()
+        void Awake()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _audioSource = GetComponent<AudioSource>();
-            _animator = GetComponent<Animator>();
-            originalSprite = _spriteRenderer.sprite;
+            originalSprite = spriteRenderer.sprite;
         }
 
         // Update is called once per frame
@@ -89,10 +110,9 @@ namespace Game
 
         void Reset()
         {
-            _spriteRenderer.sprite = originalSprite;
-            _animator.SetBool("isPopped", false);
+            spriteRenderer.sprite = originalSprite;
+            animator.SetBool("isPopped", false);
             if (glowEffect != null) glowEffect.enabled = true;
-            _audioSource.Stop();
             if (isLocked) UnlockPosition();
             neighbors.Clear();
             firstCollision = true;
@@ -100,7 +120,7 @@ namespace Game
     
         public void Pop()
         {
-            _animator.SetBool("isPopped", true);
+            animator.SetBool("isPopped", true);
             if (glowEffect != null) glowEffect.enabled = false;
             Invoke(nameof(DestroyBubble), popAnimation.length);
             
@@ -144,11 +164,11 @@ namespace Game
 
         public bool IsSameColor(Bubble other) => GetColor() == other.GetColor();
 
-        public void SetRandomColor() => SetColor(colors[Random.Range(0, colors.Count - 1)]);
+        public void SetRandomColor() => SetColor(colors[UnityEngine.Random.Range(0, colors.Count - 1)]);
 
         public void SetColor(Color color) 
         {
-            _spriteRenderer.color = color;
+            spriteRenderer.color = color;
         }
 
         public Color GetColor() => _spriteRenderer.color;
@@ -173,7 +193,7 @@ namespace Game
         private void SetVelocity()
         {
             Vector3 direction = (SpawnManager.Instance.transform.position - transform.position).normalized; // destination - origin
-            _rigidbody.linearVelocity = direction * GetVelocity();
+            rigidbody.linearVelocity = direction * GetVelocity();
         }
 
         private bool IsAtCenter()
@@ -197,12 +217,12 @@ namespace Game
         private void LockPosition()
         {
             transform.position = SpawnManager.Instance.transform.position;
-            _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             isLocked = true;
         }
         private void UnlockPosition()
         {
-            _rigidbody.constraints = RigidbodyConstraints2D.None;
+            rigidbody.constraints = RigidbodyConstraints2D.None;
             isLocked = false;
         }
 
@@ -237,7 +257,7 @@ namespace Game
             bool sameColor = IsSameColor(other);
 
             Connect(other);
-            if (firstCollision) _audioSource.Play();
+            if (firstCollision) onFirstCollision.Invoke();
             
             if (IsOutsideMainBubble())
             {

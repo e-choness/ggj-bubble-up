@@ -118,6 +118,21 @@ MonoBehaviour:
   onCollisionOutsideMainBubble:
     m_PersistentCalls:
       m_Calls: []
+  onFirstCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6759031897416344910}
+        m_TargetAssemblyTypeName: Audio.RandomClip, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onReachedCenter:
     m_PersistentCalls:
       m_Calls: []
@@ -137,3 +152,14 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6930264702222973908, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
   m_PrefabInstance: {fileID: 4615732373144281623}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6759031897416344910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2144425427148474201, guid: 17cc213dbd8cb274ab1c0a05fd27a7d5, type: 3}
+  m_PrefabInstance: {fileID: 4615732373144281623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9d00dde26ca514790f890bd9777a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -38,4 +38,4 @@ Try your best to align bubbles together and achieve the highest score as you can
 
 - Roger Hatfull
 - Echo Yin
-- Neal
+- Neal Wagram

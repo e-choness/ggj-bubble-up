@@ -14,6 +14,10 @@ Try your best to align bubbles together and achieve the highest score as you can
 
 - Watch out if any bubbles is outside the main bubble. You want them inside and make friends!
 
+## Update
+
+We are ready to release the game on Steam, [check it out here](e-choness.github.io/bubble-up-website/)!
+
 ## Engine & Packages
 
 - [Unity 6000.0.32f](https://unity.com/releases/editor/whats-new/6000.0.32)
@@ -37,5 +41,5 @@ Try your best to align bubbles together and achieve the highest score as you can
 ## Credits
 
 - Roger Hatfull
-- Echo Yin
+- Beili (Echo) Yin
 - Neal Wagram

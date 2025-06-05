@@ -15,7 +15,7 @@ Try your best to align bubbles together and achieve the highest score as you can
 
 ## Update
 
-We are ready to release the game on Steam, [check it out here](e-choness.github.io/bubble-up-website/)!
+We are ready to release the game on Steam, [wishlist now](<[e-choness.github.io/bubble-up-website/](https://store.steampowered.com/app/3655340/Bubble_UP/)>)!
 
 ## Engine & Packages
 
@@ -78,7 +78,7 @@ We are ready to release the game on Steam, [check it out here](e-choness.github.
 
 ### Project Settings
 
-- **Unity Editor Version**: 6000.0.32f1
+- **Unity Editor Version**: [6000.0.32f1](https://unity.com/releases/editor/archive)
 
 ## Credits
 
